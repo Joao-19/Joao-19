@@ -3,24 +3,29 @@
 Welcome to my profile! I'm a passionate developer focusing on building great web experiences.
 
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=2196F3&center=true&vCenter=true&width=435&lines=Full+Stack+Developer;Open+Source+Enthusiast;Creative+Coder;Always+Learning" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?lines=Full+Stack+Developer;Open+Source+Enthusiast;Creative+Coder;Always+Learning&center=true&width=435&height=50&color=2196F3" alt="Typing SVG" />
 </div>
 
 <div align="center">
+  <!-- 
+  Services are currently experiencing high traffic (503 error). 
+  Uncomment these lines when they are back up!
+  
   <img src="https://github-profile-trophy.vercel.app/?username=Joao-19&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4" alt="Trophies" />
+  -->
 </div>
 
 <br/>
 
 <div align="center">
-  <h3>🔥 Coding Streak</h3>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Joao-19&theme=tokyonight&hide_border=true" alt="Streak Stats" />
-</div>
-
-<div align="center">
-  <h3>📊 GitHub Stats</h3>
-  <img src="https://github-readme-stats.vercel.app/api?username=Joao-19&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117" alt="Joao's GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Joao-19&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117" alt="Top Languages" />
+  <h3>📊 Statistics</h3>
+  <!-- 
+  <div align="center">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Joao-19&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
+    <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Joao-19&layout=compact&theme=tokyonight"/>
+  </div>
+  -->
+  <p><i>Stats loading... (Service currently unavailable)</i></p>
 </div>
 
 <div align="center">
@@ -44,7 +49,7 @@ Welcome to my profile! I'm a passionate developer focusing on building great web
 
 <div align="center">
   <h3>🐍 Contribution Snake</h3>
-  <img src="https://github.com/Joao-19/Joao-19/blob/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
+  <img src="https://raw.githubusercontent.com/Joao-19/Joao-19/output/github-contribution-grid-snake.svg" alt="Snake Animation" />
 </div>
 
 ---
