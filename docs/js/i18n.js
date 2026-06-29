@@ -89,9 +89,9 @@ const I18N = {
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Projeto pessoal · dev.worldsrpg.com",
     "projects.per2.desc": "Plataforma de RPG multiplayer com aplicação web, painel administrativo e API em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, TypeScript e PostgreSQL.",
-    "projects.per3.name": "CasaShopping — Catálogo & Backoffice",
-    "projects.per3.meta": "Projeto pessoal",
-    "projects.per3.desc": "Plataforma de catálogo de produtos com painel administrativo, em arquitetura de microsserviços (web, admin, API gateway, auth, produtos e storage). Monorepo Turborepo com Next.js, NestJS, PostgreSQL, MinIO e Docker.",
+    "projects.per3.name": "Guia de Compras CasaShopping",
+    "projects.per3.meta": "FullStack + DevOps · 2026",
+    "projects.per3.desc": "Plataforma de catálogo de produtos com painel administrativo, em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, PostgreSQL, MinIO e Docker.",
 
     /* --- SOBRE --- */
     "about.title": "Sobre mim",
@@ -250,9 +250,9 @@ const I18N = {
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Personal project · dev.worldsrpg.com",
     "projects.per2.desc": "Multiplayer RPG platform with a web app, admin panel and API in a microservices architecture. Turborepo monorepo with Next.js, NestJS, TypeScript and PostgreSQL.",
-    "projects.per3.name": "CasaShopping — Catalog & Backoffice",
-    "projects.per3.meta": "Personal project",
-    "projects.per3.desc": "Product catalog platform with an admin panel, in a microservices architecture (web, admin, API gateway, auth, products and storage). Turborepo monorepo with Next.js, NestJS, PostgreSQL, MinIO and Docker.",
+    "projects.per3.name": "Guia de Compras CasaShopping",
+    "projects.per3.meta": "FullStack + DevOps · 2026",
+    "projects.per3.desc": "Product catalog platform with an admin panel, in a microservices architecture. Turborepo monorepo with Next.js, NestJS, PostgreSQL, MinIO and Docker.",
 
     /* --- ABOUT --- */
     "about.title": "About me",
