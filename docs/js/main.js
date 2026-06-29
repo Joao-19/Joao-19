@@ -201,9 +201,19 @@ function initCine() {
 
 /* -------- Setores expansíveis (página Sobre) -------- */
 function initExpanders() {
+  // setores expansíveis (Sobre)
   document.querySelectorAll(".sector__expand").forEach((btn) => {
     btn.addEventListener("click", () => {
       const panel = btn.parentElement.querySelector(".sector__more");
+      if (!panel) return;
+      const open = panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+  // cards de projeto expansíveis (Projetos)
+  document.querySelectorAll(".pcard__head").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const panel = btn.parentElement.querySelector(".pcard__body");
       if (!panel) return;
       const open = panel.classList.toggle("open");
       btn.setAttribute("aria-expanded", String(open));

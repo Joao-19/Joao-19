@@ -358,6 +358,37 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
 }
 .proj__link:hover { border-color: var(--acc); box-shadow: 0 0 0 1px var(--acc) inset; }
 
+/* ===================== PROJECT CARDS (expansíveis) ===================== */
+.pcard { border-bottom: 1px solid var(--line); }
+.pcard:last-child { border-bottom: 0; }
+.pcard__head {
+  width: 100%; text-align: left; background: none; border: 0; color: inherit;
+  font-family: var(--mono); cursor: pointer;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: 22px 24px; transition: background var(--trans);
+}
+.pcard__head:hover { background: var(--bg-2); }
+.pcard__idx { color: var(--acc); font-size: 12.5px; }
+.pcard__name { font-size: 17px; font-weight: 700; }
+.pcard__name::before { content: "> "; color: var(--ink-faint); }
+.pcard__meta { margin-left: auto; color: var(--acc); font-size: 12px; }
+.pcard__chev { color: var(--acc); transition: transform .3s ease; }
+.pcard__head[aria-expanded="true"] .pcard__chev { transform: rotate(180deg); }
+.pcard__body {
+  max-height: 0; overflow: hidden; opacity: 0; padding: 0 24px;
+  transition: max-height .5s ease, opacity .4s ease, padding .4s ease;
+}
+.pcard__body.open { max-height: 720px; opacity: 1; padding-bottom: 24px; }
+.pcard__desc { color: var(--ink-dim); font-size: 14px; line-height: 1.75; max-width: 82ch; }
+.pcard__pills { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.pcard__subtitle { margin-top: 18px; color: var(--ink-faint); font-size: 13px; }
+.pcard__sub { margin-top: 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.subcard { border: 1px solid var(--line); padding: 13px 15px; transition: border-color var(--trans), background var(--trans); }
+.subcard:hover { border-color: var(--acc); background: var(--bg-2); }
+.subcard__name { font-size: 13.5px; font-weight: 700; }
+.subcard__name::before { content: "▸ "; color: var(--acc); }
+.pcard__foot { margin-top: 16px; }
+
 /* ===================== FOOTER ===================== */
 footer.site {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -536,6 +567,8 @@ body.cine-page nav.top {
   .svc__item, .partner { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
   .svc__item:last-child, .partner:last-child { border-bottom: 0 !important; }
   .res-head { padding: 28px 22px; }
+  .pcard__sub { grid-template-columns: 1fr; }
+  .pcard__meta { margin-left: 0; flex-basis: 100%; }
   nav.top .brand { padding: 0 14px; }
   nav.top .links a { padding: 0 12px; font-size: 12px; }
   nav.top .links a .n { display: none; }
