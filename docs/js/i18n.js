@@ -26,7 +26,7 @@ const I18N = {
     "home.stats.1": "anos de experiência",
     "home.stats.2": "projetos internacionais · Japão",
     "home.stats.3": "tecnologias no stack",
-    "home.stats.4": "setores · imobiliário, logística e games",
+    "home.stats.4": "projetos · imobiliário, logística, saas, games e fintech",
 
     /* --- HOME / Sobre curto --- */
     "home.about.title": "Um pouco sobre mim",
