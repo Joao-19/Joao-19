@@ -1,0 +1,5 @@
+Coloque seu curriculo aqui com o nome exato:
+
+    curriculo.pdf
+
+O botao "Baixar curriculo" na pagina /curriculo.html aponta para assets/curriculo.pdf.
