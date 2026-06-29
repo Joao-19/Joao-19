@@ -230,7 +230,7 @@ function initExpanders() {
 const COMPANIES = {
   byterain: { title: "ByteRain", logo: "assets/byterain.svg", url: "https://byterain-it.com" },
   // iconOnly: mostra apenas o ícone (sem o nome); brand: mantém a cor original do logo (sem inverter)
-  loopera: { title: "Loopera", logo: "assets/loopera.svg", url: "https://looperacriativo.com", iconOnly: true, brand: true },
+  loopera: { title: "Loopera", logo: "assets/loopera.svg", url: "https://loopera.com.br", iconOnly: true, brand: true },
 };
 
 function renderCompanyPills() {
