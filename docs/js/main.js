@@ -229,6 +229,8 @@ function initExpanders() {
 /* Registro de empresas — adicione novas aqui (aceita ícone + título + url). */
 const COMPANIES = {
   byterain: { title: "ByteRain", logo: "assets/byterain.svg", url: "https://byterain-it.com" },
+  // iconOnly: mostra apenas o ícone (sem o nome); brand: mantém a cor original do logo (sem inverter)
+  loopera: { title: "Loopera", logo: "assets/loopera.svg", url: "https://looperacriativo.com", iconOnly: true, brand: true },
 };
 
 function renderCompanyPills() {
@@ -236,11 +238,13 @@ function renderCompanyPills() {
     const c = COMPANIES[el.getAttribute("data-company")];
     if (!c) return;
     const prefix = el.getAttribute("data-prefix");
+    const logoClass = "cpill__logo" + (c.brand ? " cpill__logo--brand" : "");
     el.innerHTML =
       (prefix ? `<span class="cpill__via">${prefix}</span>` : "") +
       `<button type="button" class="cpill__btn" data-url="${c.url}" data-title="${c.title}" aria-label="${c.title} — abrir site">` +
-      `<img class="cpill__logo" src="${c.logo}" alt="" aria-hidden="true" />` +
-      `<span class="cpill__name">${c.title}</span></button>`;
+      `<img class="${logoClass}" src="${c.logo}" alt="" aria-hidden="true" />` +
+      (c.iconOnly ? "" : `<span class="cpill__name">${c.title}</span>`) +
+      `</button>`;
   });
   document.querySelectorAll(".cpill__btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
