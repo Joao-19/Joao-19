@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 96" preserveAspectRatio="none">
+  <defs>
+    <polygon id="h" points="-14,0 -7,-12.12 7,-12.12 14,0 7,12.12 -7,12.12" fill="#fff"/>
+  </defs>
+  <!-- lado direito: imagem cheia -->
+  <rect x="100" y="0" width="110" height="96" fill="#fff"/>
+  <!-- transição: hexágonos cortando a borda esquerda, mais fortes à direita -->
+  <g>
+    <use href="#h" x="26" y="8"  opacity="0.16"/>
+    <use href="#h" x="26" y="32" opacity="0.16"/>
+    <use href="#h" x="26" y="56" opacity="0.16"/>
+    <use href="#h" x="26" y="80" opacity="0.16"/>
+
+    <use href="#h" x="47" y="20" opacity="0.36"/>
+    <use href="#h" x="47" y="44" opacity="0.36"/>
+    <use href="#h" x="47" y="68" opacity="0.36"/>
+    <use href="#h" x="47" y="92" opacity="0.36"/>
+
+    <use href="#h" x="68" y="8"  opacity="0.6"/>
+    <use href="#h" x="68" y="32" opacity="0.6"/>
+    <use href="#h" x="68" y="56" opacity="0.6"/>
+    <use href="#h" x="68" y="80" opacity="0.6"/>
+
+    <use href="#h" x="89" y="20" opacity="0.85"/>
+    <use href="#h" x="89" y="44" opacity="0.85"/>
+    <use href="#h" x="89" y="68" opacity="0.85"/>
+    <use href="#h" x="89" y="92" opacity="0.85"/>
+  </g>
+</svg>
