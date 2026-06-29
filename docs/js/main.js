@@ -221,6 +221,68 @@ function initExpanders() {
   });
 }
 
+/* -------- Componente reutilizável: pílula de empresa -------- */
+/* Registro de empresas — adicione novas aqui (aceita ícone + título + url). */
+const COMPANIES = {
+  byterain: { title: "ByteRain", logo: "assets/byterain.svg", url: "https://byterain-it.com" },
+};
+
+function renderCompanyPills() {
+  document.querySelectorAll(".cpill[data-company]").forEach((el) => {
+    const c = COMPANIES[el.getAttribute("data-company")];
+    if (!c) return;
+    const prefix = el.getAttribute("data-prefix");
+    el.innerHTML =
+      (prefix ? `<span class="cpill__via">${prefix}</span>` : "") +
+      `<button type="button" class="cpill__btn" data-url="${c.url}" data-title="${c.title}" aria-label="${c.title} — abrir site">` +
+      `<img class="cpill__logo" src="${c.logo}" alt="" aria-hidden="true" />` +
+      `<span class="cpill__name">${c.title}</span></button>`;
+  });
+  document.querySelectorAll(".cpill__btn").forEach((btn) => {
+    btn.addEventListener("click", () => openRedirectModal(btn.dataset.url, btn.dataset.title));
+  });
+}
+
+/* -------- Modal de aviso de redirecionamento (padrão do componente) -------- */
+let pendingUrl = null;
+function ensureModal() {
+  if (document.getElementById("redirectModal")) return;
+  const wrap = document.createElement("div");
+  wrap.id = "redirectModal";
+  wrap.className = "modal";
+  wrap.innerHTML = `
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__bar"><span class="dot"></span><span>external_redirect.sh</span></div>
+      <div class="modal__body">
+        <p class="modal__title" id="modalTitle" data-i18n="modal.title">Você será redirecionado</p>
+        <p class="modal__text"><span data-i18n="modal.text">Saindo do portfólio para um site externo:</span><br><span class="modal__url" id="modalUrl"></span></p>
+        <div class="modal__actions">
+          <button class="btn" data-close><span class="p">✕</span> <span data-i18n="modal.cancel">cancelar</span></button>
+          <button class="btn btn--solid" id="modalGo"><span class="p">↗</span> <span data-i18n="modal.continue">continuar</span></button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(wrap);
+  wrap.querySelectorAll("[data-close]").forEach((e) => e.addEventListener("click", closeRedirectModal));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeRedirectModal(); });
+}
+function openRedirectModal(url) {
+  ensureModal();
+  pendingUrl = url;
+  const m = document.getElementById("redirectModal");
+  m.querySelector("#modalUrl").textContent = url;
+  m.querySelector("#modalGo").onclick = () => {
+    if (pendingUrl) window.open(pendingUrl, "_blank", "noopener");
+    closeRedirectModal();
+  };
+  m.classList.add("open");
+}
+function closeRedirectModal() {
+  const m = document.getElementById("redirectModal");
+  if (m) m.classList.remove("open");
+}
+
 /* -------- Inicialização -------- */
 function initChrome() {
   const active = document.body.getAttribute("data-page") || "index.html";
@@ -228,6 +290,9 @@ function initChrome() {
   const footMount = document.getElementById("site-footer");
   if (navMount) navMount.innerHTML = navHTML(active);
   if (footMount) footMount.innerHTML = footerHTML();
+
+  ensureModal();
+  renderCompanyPills();
 
   const themeBtn = document.getElementById("themeToggle");
   const langBtn = document.getElementById("langToggle");

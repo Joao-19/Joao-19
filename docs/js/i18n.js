@@ -15,6 +15,12 @@ const I18N = {
     "footer.rights": "Todos os direitos reservados.",
     "footer.built": "Feito com café e código.",
 
+    /* --- Modal de redirecionamento --- */
+    "modal.title": "Você será redirecionado",
+    "modal.text": "Saindo do portfólio para um site externo:",
+    "modal.cancel": "cancelar",
+    "modal.continue": "continuar",
+
     /* --- HOME / Hero --- */
     "home.hello": "Olá, eu sou",
     "home.role": "Desenvolvedor Full Stack",
@@ -83,6 +89,9 @@ const I18N = {
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Projeto pessoal · dev.worldsrpg.com",
     "projects.per2.desc": "Plataforma de RPG multiplayer com aplicação web, painel administrativo e API em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, TypeScript e PostgreSQL.",
+    "projects.per3.name": "CasaShopping — Catálogo & Backoffice",
+    "projects.per3.meta": "Projeto pessoal",
+    "projects.per3.desc": "Plataforma de catálogo de produtos com painel administrativo, em arquitetura de microsserviços (web, admin, API gateway, auth, produtos e storage). Monorepo Turborepo com Next.js, NestJS, PostgreSQL, MinIO e Docker.",
 
     /* --- SOBRE --- */
     "about.title": "Sobre mim",
@@ -167,6 +176,12 @@ const I18N = {
     "footer.rights": "All rights reserved.",
     "footer.built": "Built with coffee and code.",
 
+    /* --- Redirect modal --- */
+    "modal.title": "You're being redirected",
+    "modal.text": "Leaving the portfolio to an external site:",
+    "modal.cancel": "cancel",
+    "modal.continue": "continue",
+
     /* --- HOME / Hero --- */
     "home.hello": "Hi, I'm",
     "home.role": "Full Stack Developer",
@@ -235,6 +250,9 @@ const I18N = {
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Personal project · dev.worldsrpg.com",
     "projects.per2.desc": "Multiplayer RPG platform with a web app, admin panel and API in a microservices architecture. Turborepo monorepo with Next.js, NestJS, TypeScript and PostgreSQL.",
+    "projects.per3.name": "CasaShopping — Catalog & Backoffice",
+    "projects.per3.meta": "Personal project",
+    "projects.per3.desc": "Product catalog platform with an admin panel, in a microservices architecture (web, admin, API gateway, auth, products and storage). Turborepo monorepo with Next.js, NestJS, PostgreSQL, MinIO and Docker.",
 
     /* --- ABOUT --- */
     "about.title": "About me",
