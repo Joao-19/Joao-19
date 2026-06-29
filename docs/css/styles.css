@@ -362,14 +362,37 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
 .pcard { border-bottom: 1px solid var(--line); }
 .pcard:last-child { border-bottom: 0; }
 .pcard__head {
+  position: relative; overflow: hidden; min-height: 96px;
   width: 100%; text-align: left; color: inherit;
   font-family: var(--mono); cursor: pointer;
   display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
   padding: 22px 24px; transition: background var(--trans);
   -webkit-user-select: none; user-select: none;
 }
-.pcard__head:hover { background: var(--bg-2); }
+.pcard__head:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
 .pcard__head:focus-visible { outline: 1px solid var(--acc); outline-offset: -1px; }
+.pcard__head > :not(.pcard__deco) { position: relative; z-index: 1; }
+
+/* pílula de empresa no fim do cabeçalho, antes do meta (padrão) */
+.pcard__head .cpill--inline { margin-left: auto; }
+.pcard__head .cpill--inline + .pcard__meta { margin-left: 0; }
+
+/* camada decorativa: imagem à direita + smoke + cortes hexagonais à esquerda */
+.pcard__deco { position: absolute; top: 0; right: 0; bottom: 0; width: 46%; z-index: 0; pointer-events: none; }
+.pcard__deco-img {  /* imagem com smoke esfumaçando à esquerda */
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: right center;
+  opacity: .42;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 60%);
+}
+.pcard__deco::after {  /* cortes hexagonais (efeito tech) na junção esquerda */
+  content: ""; position: absolute; inset: 0;
+  background: url(../assets/hex.svg) left center / 30px 52px;
+  opacity: .2;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, transparent 50%);
+          mask-image: linear-gradient(to right, #000 0%, transparent 50%);
+}
 .pcard__idx { color: var(--acc); font-size: 12.5px; }
 .pcard__name { font-size: 17px; font-weight: 700; }
 .pcard__name::before { content: "> "; color: var(--ink-faint); }
