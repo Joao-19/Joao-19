@@ -211,12 +211,16 @@ function initExpanders() {
     });
   });
   // cards de projeto expansíveis (Projetos)
-  document.querySelectorAll(".pcard__head").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const panel = btn.parentElement.querySelector(".pcard__body");
+  document.querySelectorAll(".pcard__head").forEach((head) => {
+    const toggle = () => {
+      const panel = head.parentElement.querySelector(".pcard__body");
       if (!panel) return;
       const open = panel.classList.toggle("open");
-      btn.setAttribute("aria-expanded", String(open));
+      head.setAttribute("aria-expanded", String(open));
+    };
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
   });
 }
@@ -239,7 +243,10 @@ function renderCompanyPills() {
       `<span class="cpill__name">${c.title}</span></button>`;
   });
   document.querySelectorAll(".cpill__btn").forEach((btn) => {
-    btn.addEventListener("click", () => openRedirectModal(btn.dataset.url, btn.dataset.title));
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // não aciona o toggle do card-pai
+      openRedirectModal(btn.dataset.url, btn.dataset.title);
+    });
   });
 }
 
