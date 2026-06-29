@@ -393,9 +393,11 @@ body.cine-page nav.top {
   scroll-snap-align: center;
   scroll-snap-stop: always;          /* evita pular setores */
   display: flex; align-items: center;
-  padding: 90px clamp(28px, 9vw, 160px) 90px clamp(96px, 16vw, 280px);
+  padding: 78px clamp(28px, 9vw, 160px) 78px clamp(96px, 16vw, 280px);
   border-bottom: 1px solid var(--line-2);
 }
+/* ao expandir, alinha ao topo para o conteúdo extra caber/ler bem */
+.sector:has(.sector__more.open) { align-items: flex-start; }
 .sector__index {
   position: absolute; top: 90px; right: clamp(28px, 9vw, 160px);
   color: var(--ink-faint); font-size: 12.5px; letter-spacing: .1em;
@@ -422,7 +424,8 @@ body.cine-page nav.top {
   transition: opacity .8s cubic-bezier(.16,.84,.28,1), transform .8s cubic-bezier(.16,.84,.28,1);
 }
 .sector__title, .sector__text,
-.sector__lead, .sector__values, .sector__cta {
+.sector__lead, .sector__values, .sector__cta,
+.sector__pills, .sector__expand {
   opacity: 0; transform: translateY(34px); filter: blur(2px);
   transition: opacity .9s cubic-bezier(.16,.84,.28,1),
               transform .9s cubic-bezier(.16,.84,.28,1),
@@ -432,7 +435,9 @@ body.cine-page nav.top {
 .sector.is-active .sector__title  { opacity: 1; transform: none; filter: none; transition-delay: .18s; }
 .sector.is-active .sector__lead,
 .sector.is-active .sector__text   { opacity: 1; transform: none; filter: none; transition-delay: .34s; }
+.sector.is-active .sector__pills  { opacity: 1; transform: none; filter: none; transition-delay: .46s; }
 .sector.is-active .sector__values { opacity: 1; transform: none; filter: none; transition-delay: .46s; }
+.sector.is-active .sector__expand { opacity: 1; transform: none; filter: none; transition-delay: .56s; }
 .sector.is-active .sector__cta    { opacity: 1; transform: none; filter: none; transition-delay: .60s; }
 .sector--intro .sector__lead {
   color: var(--ink); font-size: clamp(17px, 2.2vw, 22px); line-height: 1.7;
@@ -450,6 +455,37 @@ body.cine-page nav.top {
 .sector__value { color: var(--ink); font-size: clamp(15px, 1.8vw, 19px); }
 .sector__value::before { content: "▍ "; color: var(--acc); }
 .sector__cta { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* pílulas de empresas parceiras */
+.sector__pills { margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.pill {
+  border: 1px solid var(--line); padding: 6px 12px;
+  font-size: 12px; color: var(--ink-dim); letter-spacing: .02em;
+}
+.pill--accent { border-color: var(--acc); color: var(--acc); }
+.pill--accent::before { content: "● "; }
+
+/* expansível — "falar mais" */
+.sector__expand {
+  margin-top: 24px;
+  display: inline-flex; align-items: center; gap: 9px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  color: var(--ink); font-family: var(--mono); font-size: 13px;
+  padding: 11px 16px; cursor: pointer;
+  transition: border-color var(--trans), color var(--trans);
+}
+.sector__expand:hover { border-color: var(--acc); color: var(--acc); }
+.sector__expand .chev { color: var(--acc); transition: transform .3s ease; }
+.sector__expand[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.sector__more {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height .5s ease, opacity .4s ease, margin-top .4s ease;
+}
+.sector__more.open { max-height: 460px; opacity: 1; margin-top: 22px; }
+.sector__more-title { color: var(--ink-faint); font-size: 13px; }
+.sector__more-list { margin-top: 12px; display: grid; gap: 9px; }
+.sector__more-item { color: var(--ink-dim); font-size: 14px; }
+.sector__more-item::before { content: "› "; color: var(--acc); }
 
 /* left rail (fixed timeline) */
 .rail {
@@ -520,5 +556,6 @@ body.cine-page nav.top {
   * { animation: none !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
   .sector__year, .sector__title, .sector__text,
-  .sector__lead, .sector__values, .sector__cta { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .sector__lead, .sector__values, .sector__cta,
+  .sector__pills, .sector__expand { opacity: 1 !important; transform: none !important; filter: none !important; }
 }

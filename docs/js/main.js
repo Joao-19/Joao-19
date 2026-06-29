@@ -199,6 +199,18 @@ function initCine() {
   );
 }
 
+/* -------- Setores expansíveis (página Sobre) -------- */
+function initExpanders() {
+  document.querySelectorAll(".sector__expand").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const panel = btn.parentElement.querySelector(".sector__more");
+      if (!panel) return;
+      const open = panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+}
+
 /* -------- Inicialização -------- */
 function initChrome() {
   const active = document.body.getAttribute("data-page") || "index.html";
@@ -219,6 +231,7 @@ function initChrome() {
   scrambleTagline();
   initReveal();
   initCine();
+  initExpanders();
 }
 
 setTheme(getTheme()); // evita flash
