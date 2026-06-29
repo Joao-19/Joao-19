@@ -436,8 +436,8 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
 .cpill__btn:hover { box-shadow: 0 0 0 1px var(--acc) inset; transform: translateY(-1px); }
 .cpill__logo { width: 16px; height: 16px; filter: invert(1); }
 [data-theme="light"] .cpill__logo { filter: none; }
-/* logo de marca (ex.: Loopera) mantém a cor original e ocupa toda a pílula quando é só ícone */
-.cpill__logo--brand { filter: none; width: 30px; height: 16px; object-fit: contain; }
+/* logo de marca (ex.: Loopera): usa o SVG como entregue (ícone + texto), cor original, largura automática */
+.cpill__logo--brand { filter: none; width: auto; height: 18px; }
 
 /* ===================== MODAL (aviso de redirecionamento) ===================== */
 .modal { position: fixed; inset: 0; z-index: 100; display: none; }
