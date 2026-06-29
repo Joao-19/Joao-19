@@ -79,10 +79,10 @@ const I18N = {
     "projects.pro3.desc": "Recuperação e evolução de sistema legado: correção de bugs e desenvolvimento de funcionalidades pendentes.",
     "projects.per1.name": "WePlanner",
     "projects.per1.meta": "Projeto pessoal",
-    "projects.per1.desc": "[PLACEHOLDER] Descreva o WePlanner — o que é, a stack usada e o seu papel no projeto.",
+    "projects.per1.desc": "Plataforma de gestão e planejamento colaborativo: dashboard, automações e múltiplos serviços em monorepo. Construída com Turborepo (NestJS + Next.js), Prisma e PostgreSQL.",
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Projeto pessoal · dev.worldsrpg.com",
-    "projects.per2.desc": "[PLACEHOLDER] Descreva o RPG Gaming (dev.worldsrpg.com) — o que é, a stack usada e o seu papel no projeto.",
+    "projects.per2.desc": "Plataforma de RPG multiplayer com aplicação web, painel administrativo e API em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, TypeScript e PostgreSQL.",
 
     /* --- SOBRE --- */
     "about.title": "Sobre mim",
@@ -220,10 +220,10 @@ const I18N = {
     "projects.pro3.desc": "Recovery and evolution of a legacy system: bug fixing and development of pending features.",
     "projects.per1.name": "WePlanner",
     "projects.per1.meta": "Personal project",
-    "projects.per1.desc": "[PLACEHOLDER] Describe WePlanner — what it is, the stack used and your role.",
+    "projects.per1.desc": "Collaborative planning and management platform: dashboard, automations and multiple services in a monorepo. Built with Turborepo (NestJS + Next.js), Prisma and PostgreSQL.",
     "projects.per2.name": "RPG Gaming — Worlds RPG",
     "projects.per2.meta": "Personal project · dev.worldsrpg.com",
-    "projects.per2.desc": "[PLACEHOLDER] Describe RPG Gaming (dev.worldsrpg.com) — what it is, the stack used and your role.",
+    "projects.per2.desc": "Multiplayer RPG platform with a web app, admin panel and API in a microservices architecture. Turborepo monorepo with Next.js, NestJS, TypeScript and PostgreSQL.",
 
     /* --- ABOUT --- */
     "about.title": "About me",
