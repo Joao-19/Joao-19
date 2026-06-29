@@ -41,39 +41,63 @@
         <p class="proj-note" data-i18n="projects.pro.note">Trabalhos para empresas e clientes — alguns sob NDA, sem link público.</p>
 
         <div class="proj-list">
-          <article class="proj">
-            <div class="proj__head">
-              <span class="proj__idx">[ 00 ]</span>
-              <span class="proj__name" data-i18n="projects.pro1.name">Plataforma Imobiliária (Japão)</span>
-              <span class="proj__meta" data-i18n="projects.pro1.meta">Front-End · Back-End · App iOS · 2022 – 2025</span>
-            </div>
-            <p class="proj__desc" data-i18n="projects.pro1.desc"></p>
-            <div class="proj__foot">
-              <span class="proj__badge" data-i18n="projects.private">projeto privado</span>
+          <!-- HouseDo (aberto por padrão) com cards-filhos dos apps -->
+          <article class="pcard">
+            <button class="pcard__head" type="button" aria-expanded="true">
+              <span class="pcard__idx">[ 00 ]</span>
+              <span class="pcard__name" data-i18n="projects.pro1.name">HouseDo — Plataforma Imobiliária</span>
+              <span class="pcard__meta" data-i18n="projects.pro1.meta">via ByteRain · Japão · 2021 – 2025</span>
+              <span class="pcard__chev">▾</span>
+            </button>
+            <div class="pcard__body open">
+              <p class="pcard__desc" data-i18n="projects.pro1.desc"></p>
+              <div class="pcard__pills">
+                <span class="pill pill--accent" data-i18n="about.t4.pill1">intermediado pela ByteRain</span>
+                <span class="pill" data-i18n="about.t4.pill3">Júnior → Sênior</span>
+                <span class="pill">iOS · Web · Back-end</span>
+                <span class="pill" data-i18n="projects.private">projeto privado</span>
+              </div>
+              <p class="pcard__subtitle" data-i18n="about.t4.more">Apps iOS em que atuei ao longo do ciclo:</p>
+              <div class="pcard__sub">
+                <div class="subcard"><span class="subcard__name" data-i18n="about.t4.app1">MyPage — web & app</span></div>
+                <div class="subcard"><span class="subcard__name" data-i18n="about.t4.app2">HouseDo — app</span></div>
+                <div class="subcard"><span class="subcard__name" data-i18n="about.t4.app3">DoSupport — web & app</span></div>
+                <div class="subcard"><span class="subcard__name" data-i18n="about.t4.app4">+ outros apps · UIKit → SwiftUI</span></div>
+              </div>
             </div>
           </article>
 
-          <article class="proj">
-            <div class="proj__head">
-              <span class="proj__idx">[ 01 ]</span>
-              <span class="proj__name" data-i18n="projects.pro2.name">Cootraporter</span>
-              <span class="proj__meta" data-i18n="projects.pro2.meta">Front-End · Back-End · 2021 – 2024</span>
-            </div>
-            <p class="proj__desc" data-i18n="projects.pro2.desc"></p>
-            <div class="proj__foot">
-              <span class="proj__badge" data-i18n="projects.private">projeto privado</span>
+          <!-- Cootraporter -->
+          <article class="pcard">
+            <button class="pcard__head" type="button" aria-expanded="false">
+              <span class="pcard__idx">[ 01 ]</span>
+              <span class="pcard__name" data-i18n="projects.pro2.name">Cootraporter</span>
+              <span class="pcard__meta" data-i18n="projects.pro2.meta">Front-End · Back-End · 2021 – 2024</span>
+              <span class="pcard__chev">▾</span>
+            </button>
+            <div class="pcard__body">
+              <p class="pcard__desc" data-i18n="projects.pro2.desc"></p>
+              <div class="pcard__pills">
+                <span class="pill">Node.js</span><span class="pill">Vue.js</span><span class="pill">TypeScript</span>
+                <span class="pill" data-i18n="projects.private">projeto privado</span>
+              </div>
             </div>
           </article>
 
-          <article class="proj">
-            <div class="proj__head">
-              <span class="proj__idx">[ 02 ]</span>
-              <span class="proj__name" data-i18n="projects.pro3.name">Egnex / Nexomobi</span>
-              <span class="proj__meta" data-i18n="projects.pro3.meta">Front-End · Back-End · 2022 – 2023</span>
-            </div>
-            <p class="proj__desc" data-i18n="projects.pro3.desc"></p>
-            <div class="proj__foot">
-              <span class="proj__badge" data-i18n="projects.private">projeto privado</span>
+          <!-- Egnex / Nexomobi -->
+          <article class="pcard">
+            <button class="pcard__head" type="button" aria-expanded="false">
+              <span class="pcard__idx">[ 02 ]</span>
+              <span class="pcard__name" data-i18n="projects.pro3.name">Egnex / Nexomobi</span>
+              <span class="pcard__meta" data-i18n="projects.pro3.meta">Front-End · Back-End · 2022 – 2023</span>
+              <span class="pcard__chev">▾</span>
+            </button>
+            <div class="pcard__body">
+              <p class="pcard__desc" data-i18n="projects.pro3.desc"></p>
+              <div class="pcard__pills">
+                <span class="pill">TypeScript</span><span class="pill">Express</span><span class="pill">React Native</span>
+                <span class="pill" data-i18n="projects.private">projeto privado</span>
+              </div>
             </div>
           </article>
         </div>
@@ -88,24 +112,38 @@
         <h2 class="h"><span class="hash">## </span><span data-i18n="projects.personal.title">Projetos Pessoais</span></h2>
 
         <div class="proj-list">
-          <article class="proj">
-            <div class="proj__head">
-              <span class="proj__idx">[ 00 ]</span>
-              <span class="proj__name" data-i18n="projects.per1.name">WePlanner</span>
-              <span class="proj__meta" data-i18n="projects.per1.meta">Projeto pessoal</span>
+          <article class="pcard">
+            <button class="pcard__head" type="button" aria-expanded="false">
+              <span class="pcard__idx">[ 00 ]</span>
+              <span class="pcard__name" data-i18n="projects.per1.name">WePlanner</span>
+              <span class="pcard__meta" data-i18n="projects.per1.meta">Projeto pessoal</span>
+              <span class="pcard__chev">▾</span>
+            </button>
+            <div class="pcard__body">
+              <p class="pcard__desc" data-i18n="projects.per1.desc"></p>
+              <div class="pcard__pills">
+                <span class="pill">Turborepo</span><span class="pill">NestJS</span><span class="pill">Next.js</span>
+                <span class="pill">Prisma</span><span class="pill">PostgreSQL</span>
+              </div>
             </div>
-            <p class="proj__desc" data-i18n="projects.per1.desc"></p>
           </article>
 
-          <article class="proj">
-            <div class="proj__head">
-              <span class="proj__idx">[ 01 ]</span>
-              <span class="proj__name" data-i18n="projects.per2.name">RPG Gaming — Worlds RPG</span>
-              <span class="proj__meta" data-i18n="projects.per2.meta">Projeto pessoal · dev.worldsrpg.com</span>
-            </div>
-            <p class="proj__desc" data-i18n="projects.per2.desc"></p>
-            <div class="proj__foot">
-              <a class="proj__link" href="https://dev.worldsrpg.com" target="_blank" rel="noopener">↗ <span data-i18n="projects.visit">acessar</span></a>
+          <article class="pcard">
+            <button class="pcard__head" type="button" aria-expanded="false">
+              <span class="pcard__idx">[ 01 ]</span>
+              <span class="pcard__name" data-i18n="projects.per2.name">RPG Gaming — Worlds RPG</span>
+              <span class="pcard__meta" data-i18n="projects.per2.meta">Projeto pessoal · dev.worldsrpg.com</span>
+              <span class="pcard__chev">▾</span>
+            </button>
+            <div class="pcard__body">
+              <p class="pcard__desc" data-i18n="projects.per2.desc"></p>
+              <div class="pcard__pills">
+                <span class="pill">Turborepo</span><span class="pill">Next.js</span><span class="pill">NestJS</span>
+                <span class="pill">TypeScript</span><span class="pill">PostgreSQL</span>
+              </div>
+              <div class="pcard__foot">
+                <a class="proj__link" href="https://dev.worldsrpg.com" target="_blank" rel="noopener">↗ <span data-i18n="projects.visit">acessar</span></a>
+              </div>
             </div>
           </article>
         </div>
