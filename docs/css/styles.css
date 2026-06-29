@@ -389,6 +389,44 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
 .subcard__name::before { content: "▸ "; color: var(--acc); }
 .pcard__foot { margin-top: 16px; }
 
+/* ===================== COMPANY PILL (componente) ===================== */
+.cpill { display: inline-flex; align-items: center; gap: 8px; }
+.cpill__via { color: var(--ink-faint); font-size: 12px; }
+.cpill__btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--acc); background: var(--bg-2);
+  color: var(--acc); font-family: var(--mono); font-size: 12px; font-weight: 700;
+  padding: 5px 11px; cursor: pointer; letter-spacing: .02em;
+  transition: box-shadow var(--trans), transform var(--trans), background var(--trans);
+}
+.cpill__btn:hover { box-shadow: 0 0 0 1px var(--acc) inset; transform: translateY(-1px); }
+.cpill__logo { width: 16px; height: 16px; filter: invert(1); }
+[data-theme="light"] .cpill__logo { filter: none; }
+
+/* ===================== MODAL (aviso de redirecionamento) ===================== */
+.modal { position: fixed; inset: 0; z-index: 100; display: none; }
+.modal.open { display: block; }
+.modal__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .72); backdrop-filter: blur(2px); }
+.modal__box {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(440px, 92vw);
+  background: var(--bg); border: 1px solid var(--acc);
+  box-shadow: 0 24px 70px -22px #000;
+  animation: modalIn .25s ease;
+}
+@keyframes modalIn { from { opacity: 0; transform: translate(-50%, -45%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+.modal__bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-bottom: 1px solid var(--line);
+  background: var(--bg-2); color: var(--ink-dim); font-size: 12px;
+}
+.modal__body { padding: 22px 20px; }
+.modal__title { font-size: 17px; font-weight: 800; margin: 0; }
+.modal__title::before { content: "⚠ "; color: var(--acc); }
+.modal__text { margin: 12px 0 0; color: var(--ink-dim); font-size: 13.5px; line-height: 1.7; }
+.modal__url { color: var(--acc); word-break: break-all; }
+.modal__actions { margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end; }
+
 /* ===================== FOOTER ===================== */
 footer.site {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
