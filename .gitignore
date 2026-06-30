@@ -3,3 +3,7 @@ node_modules
 dist
 coverage
 .env
+
+# Playwright MCP — pasta temporária de screenshots/snapshots
+.playwright-mcp/
+Thumbs.db
