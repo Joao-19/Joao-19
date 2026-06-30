@@ -36,7 +36,7 @@ const I18N = {
 
     /* --- HOME / Sobre curto --- */
     "home.about.title": "Um pouco sobre mim",
-    "home.about.text": "Sou desenvolvedor full stack de Rio de Janeiro, com foco em sistemas de larga escala. Da automação industrial ao desenvolvimento web e mobile, gosto de transformar operações complexas em produtos digitais que entregam resultado de verdade.",
+    "home.about.text": "Sou desenvolvedor full stack especializado em sistemas de larga escala. Construo aplicações web e mobile que transformam operações complexas em produtos digitais simples de usar — e que entregam resultado de verdade.",
 
     /* --- HOME / Tecnologias --- */
     "home.tech.title": "Tecnologias",
@@ -62,9 +62,9 @@ const I18N = {
     "home.partners.title": "Parceiros",
     "home.partners.subtitle": "Empresas com quem colaboro",
     "home.partners.byterain": "ByteRain",
-    "home.partners.byterain.desc": "[PLACEHOLDER] Descreva a parceria com a ByteRain aqui.",
+    "home.partners.byterain.desc": "Software House · do Brasil para o mundo",
     "home.partners.loopera": "loopera",
-    "home.partners.loopera.desc": "[PLACEHOLDER] Descreva a parceria com a loopera aqui.",
+    "home.partners.loopera.desc": "Criatividade & Tech · social media, design e dev",
 
     /* --- PROJETOS --- */
     "projects.title": "Meus Projetos",
@@ -87,7 +87,7 @@ const I18N = {
     "projects.per1.meta": "Projeto pessoal",
     "projects.per1.desc": "Plataforma de gestão e planejamento colaborativo: dashboard, automações e múltiplos serviços em monorepo. Construída com Turborepo (NestJS + Next.js), Prisma e PostgreSQL.",
     "projects.per2.name": "RPG Gaming — Worlds RPG",
-    "projects.per2.meta": "Projeto pessoal · dev.worldsrpg.com",
+    "projects.per2.meta": "Projeto pessoal",
     "projects.per2.desc": "Plataforma de RPG multiplayer com aplicação web, painel administrativo e API em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, TypeScript e PostgreSQL.",
     "projects.per3.name": "Guia de Compras CasaShopping",
     "projects.per3.meta": "FullStack + DevOps · 2026",
@@ -197,7 +197,7 @@ const I18N = {
 
     /* --- HOME / Short about --- */
     "home.about.title": "A bit about me",
-    "home.about.text": "I'm a full stack developer from Rio de Janeiro, focused on large-scale systems. From industrial automation to web and mobile development, I enjoy turning complex operations into digital products that deliver real results.",
+    "home.about.text": "I'm a full stack developer specialized in large-scale systems. I build web and mobile applications that turn complex operations into digital products that are simple to use — and that deliver real results.",
 
     /* --- HOME / Tech --- */
     "home.tech.title": "Technologies",
@@ -223,9 +223,9 @@ const I18N = {
     "home.partners.title": "Partners",
     "home.partners.subtitle": "Companies I collaborate with",
     "home.partners.byterain": "ByteRain",
-    "home.partners.byterain.desc": "[PLACEHOLDER] Describe the ByteRain partnership here.",
+    "home.partners.byterain.desc": "Software House · from Brazil to the world",
     "home.partners.loopera": "loopera",
-    "home.partners.loopera.desc": "[PLACEHOLDER] Describe the loopera partnership here.",
+    "home.partners.loopera.desc": "Creativity & Tech · social media, design and dev",
 
     /* --- PROJECTS --- */
     "projects.title": "My Projects",
@@ -248,7 +248,7 @@ const I18N = {
     "projects.per1.meta": "Personal project",
     "projects.per1.desc": "Collaborative planning and management platform: dashboard, automations and multiple services in a monorepo. Built with Turborepo (NestJS + Next.js), Prisma and PostgreSQL.",
     "projects.per2.name": "RPG Gaming — Worlds RPG",
-    "projects.per2.meta": "Personal project · dev.worldsrpg.com",
+    "projects.per2.meta": "Personal project",
     "projects.per2.desc": "Multiplayer RPG platform with a web app, admin panel and API in a microservices architecture. Turborepo monorepo with Next.js, NestJS, TypeScript and PostgreSQL.",
     "projects.per3.name": "Guia de Compras CasaShopping",
     "projects.per3.meta": "FullStack + DevOps · 2026",

@@ -282,12 +282,49 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
 .svc__d { margin: 9px 0 0; color: var(--ink-dim); font-size: 13px; line-height: 1.7; }
 
 /* ===================== PARTNERS ===================== */
-.partners { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); }
-.partner { padding: 22px; border-right: 1px solid var(--line); }
-.partner:last-child { border-right: 0; }
+.partners { margin-top: 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.partner { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-2); }
 .partner__name { font-size: 16px; font-weight: 700; }
 .partner__name::before { content: "● "; color: var(--acc); }
 .partner__desc { margin: 8px 0 0; color: var(--ink-dim); font-size: 13px; }
+
+/* Cards de parceiro com screenshot do site ao fundo, clique redireciona */
+.partner--site {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 190px;
+  text-decoration: none;
+  color: #fff;
+  background-size: cover;
+  background-position: top center;
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+}
+.partner--site:hover {
+  transform: translateY(-3px);
+  border-color: var(--acc);
+  box-shadow: 0 18px 40px -20px rgba(0,0,0,.7);
+}
+.partner--site .partner__name { color: #fff; }
+.partner--site .partner__desc { color: rgba(255,255,255,.82); }
+.partner--site .partner__visit {
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--acc-soft);
+}
+.partner--byterain {
+  background-image:
+    linear-gradient(to top, rgba(8,8,8,.94) 0%, rgba(8,8,8,.62) 42%, rgba(8,8,8,.12) 100%),
+    url("../assets/byterain-site.jpeg");
+}
+.partner--loopera {
+  background-image:
+    linear-gradient(to top, rgba(8,8,8,.92) 0%, rgba(8,8,8,.55) 45%, rgba(8,8,8,.10) 100%),
+    url("../assets/loopera-site.jpeg");
+}
 
 /* ===================== RESUME ===================== */
 .res-head {
@@ -635,8 +672,8 @@ body.cine-page nav.top {
   .tech:nth-child(3n) { border-right: 1px solid var(--line); }
   .tech:nth-child(2n) { border-right: 0; }
   .svc, .partners { grid-template-columns: 1fr; }
-  .svc__item, .partner { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
-  .svc__item:last-child, .partner:last-child { border-bottom: 0 !important; }
+  .svc__item { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; }
+  .svc__item:last-child { border-bottom: 0 !important; }
   .res-head { padding: 28px 22px; }
   .pcard__sub { grid-template-columns: 1fr; }
   .pcard__meta { margin-left: 0; flex-basis: 100%; }
