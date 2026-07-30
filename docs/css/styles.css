@@ -475,6 +475,13 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
   transition: box-shadow var(--trans), transform var(--trans), background var(--trans);
 }
 .cpill__btn:hover { box-shadow: 0 0 0 1px var(--acc) inset; transform: translateY(-1px); }
+/* variante estática (sem site/logo cadastrado): mesma cara do botão, sem clique */
+.cpill__chip {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--acc); background: var(--bg-2);
+  color: var(--acc); font-size: 12px; font-weight: 700;
+  padding: 5px 11px; letter-spacing: .02em;
+}
 .cpill__logo { width: 16px; height: 16px; filter: invert(1); }
 [data-theme="light"] .cpill__logo { filter: none; }
 /* logo de marca (ex.: Loopera): usa o SVG como entregue (ícone + texto), cor original, largura automática */
