@@ -610,9 +610,10 @@ a.pill { text-decoration: none; transition: border-color var(--trans), color var
 a.pill:hover { border-color: var(--acc); color: var(--acc); }
 
 /* fotos/vídeos dentro de um setor da timeline */
-.sector__media { margin: 24px 0 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; }
+.sector__media { margin: 24px 0 0; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
 .sector__media figure {
   position: relative; margin: 0; padding: 10px;
+  display: flex; flex-direction: column;
   border: 1px solid var(--line); background: var(--bg-2);
   transition: border-color var(--trans);
 }
