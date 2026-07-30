@@ -96,7 +96,7 @@ const I18N = {
     /* --- SOBRE --- */
     "about.title": "Sobre mim",
     "about.subtitle": "Da curiosidade ao código",
-    "about.intro": "Sou o João Vitor, desenvolvedor full stack nascido no Rio de Janeiro, com 5+ anos de experiência entre front-end, back-end, mobile e DevOps. A curiosidade vem de muito antes: desde pequeno eu queria saber como jogos, sites e aplicativos eram feitos por dentro.",
+    "about.intro": "Me chamo João Vitor, desenvolvedor full stack nascido no Rio de Janeiro, com 5+ anos de experiência entre front-end, back-end, mobile e DevOps. A curiosidade vem de muito antes: desde pequeno eu queria saber como jogos, sites e aplicativos eram feitos por dentro.",
     "about.timeline.title": "Minha trajetória",
     "about.t1.year": "2016 – 2020",
     "about.t1.title": "Onde tudo começou",
