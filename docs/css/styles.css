@@ -610,11 +610,9 @@ a.pill { text-decoration: none; transition: border-color var(--trans), color var
 a.pill:hover { border-color: var(--acc); color: var(--acc); }
 
 /* fotos/vídeos dentro de um setor da timeline */
-.sector__media { margin: 24px 0 0; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px; }
+.sector__media { margin: 24px 0 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; }
 .sector__media figure {
   position: relative; margin: 0; padding: 10px;
-  flex: 1 1 300px; max-width: 420px;
-  display: flex; flex-direction: column;
   border: 1px solid var(--line); background: var(--bg-2);
   transition: border-color var(--trans);
 }
@@ -625,12 +623,12 @@ a.pill:hover { border-color: var(--acc); color: var(--acc); }
 }
 .sector__media figure:hover { border-color: var(--acc); }
 .sector__media img, .sector__media video {
-  display: block; width: 100%;
-  height: clamp(140px, 25vh, 300px);
-  object-fit: cover; object-position: 50% 32%;
+  display: block; width: auto;
+  height: clamp(140px, 25vh, 300px); max-width: 100%;
   background: var(--bg);
 }
 .sector__media figcaption {
+  width: 0; min-width: 100%;
   margin-top: 10px; font-size: 12px; line-height: 1.55;
   color: var(--ink-faint);
 }
