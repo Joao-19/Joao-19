@@ -84,6 +84,13 @@ img { max-width: 100%; display: block; }
 .bar .dot { width: 8px; height: 8px; border: 1px solid var(--line); display: inline-block; }
 .bar .acc { color: var(--acc); }
 .bar .spacer { flex: 1; }
+.bar__loc { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.bar__flag {
+  width: 13px; height: 13px; border-radius: 50%;
+  object-fit: cover; flex: none;
+  border: 1px solid var(--line);
+  background: #fff;
+}
 
 /* ===================== NAV ===================== */
 nav.top {
