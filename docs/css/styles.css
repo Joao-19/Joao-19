@@ -483,8 +483,8 @@ h2.h .hash { color: var(--ink-faint); font-weight: 400; }
   padding: 5px 11px; letter-spacing: .02em;
 }
 /* logo clara (ex.: Brick): sem inversão no escuro; inverte no claro */
-.cpill__logo--light { filter: none; }
-[data-theme="light"] .cpill__logo--light { filter: invert(1); }
+.cpill__logo.cpill__logo--light { filter: none; }
+[data-theme="light"] .cpill__logo.cpill__logo--light { filter: invert(1); }
 .cpill__logo { width: 16px; height: 16px; filter: invert(1); }
 [data-theme="light"] .cpill__logo { filter: none; }
 /* logo de marca (ex.: Loopera): usa o SVG como entregue (ícone + texto), cor original, largura automática */
