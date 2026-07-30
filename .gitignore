@@ -7,3 +7,10 @@ coverage
 # Playwright MCP — pasta temporária de screenshots/snapshots
 .playwright-mcp/
 Thumbs.db
+
+# Documento pessoal de negociação — nunca publicar (repo é público)
+planejamento-brick.html
+
+# Mídias originais na raiz — as versões usadas pelo site estão em docs/assets/
+Estagio-foto.jpeg
+FECIP-PROJETO.mp4

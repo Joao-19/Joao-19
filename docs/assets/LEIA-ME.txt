@@ -3,3 +3,8 @@ Coloque seu curriculo aqui com o nome exato:
     curriculo.pdf
 
 O botao "Baixar curriculo" na pagina /curriculo.html aponta para assets/curriculo.pdf.
+
+Midias da pagina /sobre.html (secao 01, curso tecnico):
+
+    fecip-garra.mp4           (video da feira de ciencias: garra controlada via Bluetooth pelo exo-braco)
+    estagio-santa-luzia.jpeg  (foto da visita tecnica ao Grupo Santa Luzia, Itaguai)
