@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Shopping, Mapa Interno & Serviços | Recreio Shopping (ALLOS)</title>
+  <meta name="description" content="Plantas arquitetônicas dos pisos L1, L2 e L3, 15 facilidades oficiais, guia pet friendly, horários detalhados de funcionamento e rotas de como chegar ao Recreio Shopping.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: { 'xs': '420px' },
+          colors: {
+            ocean: { 950: '#040B13', 900: '#07131F', 800: '#0B1B2B', 700: '#14283D', 600: '#1C3957', 500: '#274B72', 100: '#E8F0F8' },
+            gold: { 500: '#C5A059', 400: '#D4AF37', 300: '#E5C07B', 200: '#F2DFB8', 100: '#FAF3E5', 50: '#FDFBF7' },
+            sand: { 50: '#FBF9F5', 100: '#F5EFE6', 200: '#E8DFD3', 300: '#D5C7B5', 800: '#4A4135' },
+            coral: { 500: '#D96B43', 600: '#C25630', 100: '#FCEEE8' },
+            palm: { 600: '#255C50', 500: '#2D7364', 100: '#E7F2EF' }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 27, 43, 0.08), 0 4px 12px -2px rgba(11, 27, 43, 0.04)',
+            'modal': '0 25px 50px -12px rgba(7, 19, 31, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FBF9F5; color: #1E293B; overflow-x: hidden; width: 100%; }
+    .font-serif-lux { font-family: 'Playfair Display', Georgia, serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F5EFE6; }
+    ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 4px; }
+    .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .smooth-card { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .smooth-card:hover { transform: translateY(-4px); }
+
+    /* Transição de Entrada Suave da Página */
+    .page-content-wrapper {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-content-wrapper.page-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-gold-500 selection:text-white">
+
+  <!-- Preloader de Luxo ALLOS (Simulação de 1 Segundo) -->
+  <div id="pagePreloader" class="fixed inset-0 z-[9999] bg-ocean-950 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex flex-col items-center space-y-4 px-4 text-center">
+      <div class="relative">
+        <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-12 sm:h-14 w-auto object-contain brightness-125">
+        <div class="absolute -inset-3 rounded-full bg-gold-500/20 blur-xl animate-pulse pointer-events-none"></div>
+      </div>
+      <div class="w-36 sm:w-48 h-1 bg-ocean-800 rounded-full overflow-hidden relative">
+        <div id="preloaderBar" class="h-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 w-0 rounded-full transition-all duration-1000 ease-out"></div>
+      </div>
+      <span class="text-[10px] sm:text-[11px] font-semibold tracking-widest text-gold-400 uppercase">Carregando Mapa & Serviços...</span>
+    </div>
+  </div>
+
+  <div id="pageContentWrapper" class="page-content-wrapper">
+
+  <!-- Status Bar Oficial -->
+  <aside class="bg-ocean-900 text-white text-xs py-2 px-3 sm:px-4 border-b border-ocean-800 sticky top-0 z-50 shadow-sm w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 sm:px-3 py-1 rounded-full font-medium text-[11px] sm:text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+          <span class="font-bold tracking-wide">ESTACIONAMENTO & SERVIÇOS</span>
+          <span class="text-ocean-100/80 hidden sm:inline">• 15 min de tolerância</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-3 text-xs text-slate-300">
+        <a href="index.html" class="hover:text-gold-300 transition-colors flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Voltar ao Portal</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="glass-nav border-b border-sand-200/80 sticky top-9 z-40 transition-all duration-300 shadow-sm" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+        <a href="index.html" class="flex items-center space-x-2 sm:space-x-3 group shrink-0">
+          <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-9 sm:h-12 w-auto object-contain">
+        </a>
+
+        <nav class="hidden xl:flex items-center space-x-2 font-medium text-sm text-ocean-800 shrink-0">
+          <a href="index.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Início</a>
+          <a href="cinema.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Cinema VIP</a>
+          <a href="eventos.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Eventos & Lazer</a>
+          <a href="lojas.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Lojas & Gastronomia</a>
+          <a href="shopping.html" class="px-3.5 py-2 rounded-xl bg-gold-500 text-ocean-950 font-bold transition-colors">Shopping & Serviços</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="openSearchModal()" class="w-10 h-10 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 flex items-center justify-center border border-sand-200 transition-colors cursor-pointer">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </button>
+          <a href="https://maps.google.com/?q=Recreio+Shopping+Av.+das+Am%C3%A9ricas+19019" target="_blank" class="bg-ocean-900 hover:bg-ocean-800 text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all shadow-md flex items-center space-x-1.5">
+            <i data-lucide="navigation" class="w-4 h-4 text-gold-400"></i>
+            <span>Como Chegar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header Shopping -->
+  <section class="relative bg-gradient-to-b from-sand-100 via-sand-50 to-sand-100/60 py-12 sm:py-16 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest bg-gold-50 px-3 py-1.5 rounded-full border border-gold-300">
+        <i data-lucide="map" class="w-4 h-4"></i>
+        <span>Central de Comodidade, Plantas Arquitetônicas & Rotas</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif-lux font-medium text-ocean-900 max-w-3xl mx-auto leading-tight">
+        Tudo Sobre a Experiência no Shopping
+      </h1>
+      <p class="text-slate-600 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Navegue pelas plantas dos pisos L1, L2 e L3, consulte as 15 facilidades exclusivas e confira a tabela de horários de funcionamento de cada setor.
+      </p>
+
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-3 text-xs font-bold">
+        <a href="#mapa-interno" class="px-4 py-2 rounded-full bg-ocean-900 text-white hover:bg-ocean-800 transition-colors">
+          Mapa dos Pisos
+        </a>
+        <a href="#facilidades" class="px-4 py-2 rounded-full bg-white text-ocean-900 border border-sand-300 hover:bg-sand-100 transition-colors">
+          15 Facilidades
+        </a>
+        <a href="#horarios" class="px-4 py-2 rounded-full bg-white text-ocean-900 border border-sand-300 hover:bg-sand-100 transition-colors">
+          Horários Oficiais
+        </a>
+        <a href="#como-chegar" class="px-4 py-2 rounded-full bg-white text-ocean-900 border border-sand-300 hover:bg-sand-100 transition-colors">
+          Como Chegar & BRT
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 1. MAPA INTERNO INTERATIVO DOS PISOS                                      -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="mapa-interno">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest mb-2">
+          <i data-lucide="compass" class="w-4 h-4"></i>
+          <span>Plantas Arquitetônicas Oficiais</span>
+          <span class="w-8 h-px bg-gold-400"></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-serif-lux font-medium text-ocean-900" id="activeMapFloorTitle">
+          Piso L1 — Térreo & Alameda
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">
+          Alterne entre os pisos para consultar a disposição das marcas e a localização de banheiros, fraldários e elevadores.
+        </p>
+      </div>
+
+      <!-- Seletor de Pisos -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="changeFloorMap('L1_0')" data-map="L1_0" class="floor-map-tab shrink-0 min-h-[38px] px-4 py-2 rounded-xl bg-ocean-900 text-white font-bold text-xs cursor-pointer shadow-sm">
+          L1 Térreo
+        </button>
+        <button onclick="changeFloorMap('L1_1')" data-map="L1_1" class="floor-map-tab shrink-0 min-h-[38px] px-4 py-2 rounded-xl bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-bold text-xs cursor-pointer">
+          L1 Varanda Gourmet
+        </button>
+        <button onclick="changeFloorMap('L2')" data-map="L2" class="floor-map-tab shrink-0 min-h-[38px] px-4 py-2 rounded-xl bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-bold text-xs cursor-pointer">
+          Piso L2 (Moda)
+        </button>
+        <button onclick="changeFloorMap('L3')" data-map="L3" class="floor-map-tab shrink-0 min-h-[38px] px-4 py-2 rounded-xl bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-bold text-xs cursor-pointer">
+          Piso L3 (Cinema & Saúde)
+        </button>
+      </div>
+    </div>
+
+    <!-- Container do Mapa e Detalhes do Piso -->
+    <div class="bg-white rounded-3xl border border-sand-200 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-3">
+      
+      <!-- Visualizador da Planta com Botão Fullscreen -->
+      <div class="lg:col-span-2 bg-slate-100 p-4 sm:p-6 flex flex-col items-center justify-center relative min-h-[380px] border-b lg:border-b-0 lg:border-r border-sand-200">
+        <img id="activeMapImage" src="https://recreioshopping.com.br/data/files/86/F2/57/A6/CDCC2710A2980A27A51BF9C2/mapa_Recreio0.jpg" alt="Planta do Piso" class="max-h-[420px] w-auto object-contain rounded-xl shadow-sm">
+        
+        <button onclick="openFullscreenMap()" class="absolute bottom-4 right-4 bg-ocean-900/90 hover:bg-ocean-900 text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-lg backdrop-blur-xs transition-colors cursor-pointer">
+          <i data-lucide="maximize-2" class="w-4 h-4 text-gold-400"></i>
+          <span>Ampliar Planta (Fullscreen HD)</span>
+        </button>
+      </div>
+
+      <!-- Informações do Piso Selecionado -->
+      <div class="p-6 sm:p-8 space-y-6 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div>
+            <span class="text-xs font-bold text-gold-600 uppercase tracking-wider">Informações do Setor</span>
+            <h3 class="text-xl font-bold text-ocean-900 mt-1" id="activeMapInfoTitle">Piso L1 — Térreo & Alameda</h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed" id="activeMapInfoDesc">
+              Principal acesso de pedestres, estacionamento térreo, polo de conveniência diária, Pão de Açúcar, agências bancárias e farmácias.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-ocean-900 uppercase tracking-wider mb-2">Principais Operações:</h4>
+            <div class="flex flex-wrap gap-1.5" id="activeMapStoresList"></div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-ocean-900 uppercase tracking-wider mb-2">Facilidades no Piso:</h4>
+            <div class="grid grid-cols-2 gap-2" id="activeMapFacilitiesList"></div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-sand-200 flex gap-2">
+          <a href="lojas.html" class="flex-1 bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs py-2.5 rounded-xl text-center transition-colors">
+            Ver Lojas Deste Piso
+          </a>
+          <button onclick="openFullscreenMap()" class="px-4 py-2.5 bg-gold-500 hover:bg-gold-400 text-ocean-950 font-bold text-xs rounded-xl transition-colors cursor-pointer">
+            Zoom
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 2. HUB DE 15 FACILIDADES OFICIAIS                                         -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 bg-sand-100/70 border-y border-sand-200" id="facilidades">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest mb-2">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Conforto, Acessibilidade & Família</span>
+          <span class="w-8 h-px bg-gold-500"></span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif-lux font-medium text-ocean-900">
+          15 Facilidades & Serviços Oficiais
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">
+          Pensamos em cada detalhe para tornar sua visita agradável, inclusiva e memorável.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-palm-100 text-palm-600 flex items-center justify-center">
+            <i data-lucide="dog" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">100% Pet Friendly & Pet Park</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Seu animal de estimação é bem-vindo no mall, na Varanda Gourmet e na nossa área verde com circuito de agility.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-gold-100 text-gold-600 flex items-center justify-center">
+            <i data-lucide="baby" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">Espaço Família & Fraldário VIP</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Ambientes silenciosos com poltronas confortáveis para amamentação, micro-ondas para papinhas e trocadores higienizados.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+            <i data-lucide="headphones" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">Acolhimento TEA (Abafadores Sonoros)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Kits sensoriais e empréstimo gratuito de abafadores de ruído no Balcão do SAC para pessoas no espectro autista.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">Vagas com Recarga Elétrica (EV)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Pontos de recarga rápida para veículos elétricos e híbridos em vagas sinalizadas no estacionamento coberto.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i data-lucide="accessibility" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">Acessibilidade Total & Cadeiras Motorizadas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Empréstimo gratuito de cadeiras de rodas e motorizadas no Balcão de Informações, com rampas e elevadores panorâmicos.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-sand-200 shadow-luxury space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+            <i data-lucide="wifi" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base text-ocean-900">Wi-Fi de Alta Velocidade Gratuito</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Conexão sem fio rápida em todos os pisos, praças e decks ao ar livre para trabalhar ou navegar sem interrupções.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. HORÁRIOS DETALHADOS DE FUNCIONAMENTO                                   -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 bg-white" id="horarios">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest mb-2">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>Programação Semanal & Feriados</span>
+            <span class="w-8 h-px bg-gold-500"></span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif-lux font-medium text-ocean-900">
+            Tabela de Horários Oficiais
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm mt-1">
+            Consulte o funcionamento em tempo real de cada setor do empreendimento.
+          </p>
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-center space-x-3 shrink-0">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div class="text-xs font-bold text-emerald-900">Operação Ativa • Lojas até às 22h</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-sand-50/80 p-6 rounded-2xl border border-sand-200 space-y-3">
+          <h3 class="font-bold text-ocean-900 text-sm flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-gold-600"></i> Lojas & Quiosques
+          </h3>
+          <div class="text-xs space-y-2 text-slate-600">
+            <div class="flex justify-between py-1 border-b border-sand-200">
+              <span>Seg a Sáb:</span> <strong class="text-ocean-900">10h às 22h</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span>Dom e Feriados:</span> <strong class="text-ocean-900">13h às 21h</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-sand-50/80 p-6 rounded-2xl border border-sand-200 space-y-3">
+          <h3 class="font-bold text-ocean-900 text-sm flex items-center gap-2">
+            <i data-lucide="utensils" class="w-4 h-4 text-palm-600"></i> Varanda & Praça
+          </h3>
+          <div class="text-xs space-y-2 text-slate-600">
+            <div class="flex justify-between py-1 border-b border-sand-200">
+              <span>Seg a Qui:</span> <strong class="text-ocean-900">11h às 23h</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span>Sex e Sáb:</span> <strong class="text-ocean-900">11h às 00h</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-sand-50/80 p-6 rounded-2xl border border-sand-200 space-y-3">
+          <h3 class="font-bold text-ocean-900 text-sm flex items-center gap-2">
+            <i data-lucide="apple" class="w-4 h-4 text-emerald-600"></i> Pão de Açúcar
+          </h3>
+          <div class="text-xs space-y-2 text-slate-600">
+            <div class="flex justify-between py-1 border-b border-sand-200">
+              <span>Seg a Sáb:</span> <strong class="text-ocean-900">07h às 22h</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span>Dom e Feriados:</span> <strong class="text-ocean-900">07h às 21h</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-sand-50/80 p-6 rounded-2xl border border-sand-200 space-y-3">
+          <h3 class="font-bold text-ocean-900 text-sm flex items-center gap-2">
+            <i data-lucide="car" class="w-4 h-4 text-coral-600"></i> Estacionamento ALLOS
+          </h3>
+          <div class="text-xs space-y-2 text-slate-600">
+            <div class="flex justify-between py-1 border-b border-sand-200">
+              <span>Tolerância Gratuita:</span> <strong class="text-emerald-700">15 minutos</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span>Funcionamento:</span> <strong class="text-ocean-900">24 horas</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. COMO CHEGAR & LOCALIZAÇÃO EXATA                                        -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-16 bg-ocean-900 text-white relative" id="como-chegar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="inline-flex items-center space-x-2 text-gold-400 text-xs font-bold uppercase tracking-widest">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>No Coração do Recreio dos Bandeirantes</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-serif-lux font-medium">
+            Fácil Acesso pela Av. das Américas
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Localizado a 5 minutos das praias do Recreio, Pontal e Prainha, com estação de BRT integrada e passarela coberta direta até a portaria principal.
+          </p>
+
+          <div class="space-y-3 text-sm text-slate-200">
+            <div class="flex items-start space-x-3">
+              <i data-lucide="map-pin" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+              <span><strong>Endereço Oficial:</strong> Av. das Américas, 19.019 - Recreio dos Bandeirantes, Rio de Janeiro - RJ, CEP 22790-703</span>
+            </div>
+            <div class="flex items-start space-x-3">
+              <i data-lucide="bus" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+              <span><strong>Transporte Integrado:</strong> Estação BRT Recreio Shopping (Corredor TransOeste) com acesso exclusivo para pedestres.</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="https://maps.google.com/?q=Recreio+Shopping+Av.+das+Am%C3%A9ricas+19019" target="_blank" class="bg-gold-500 hover:bg-gold-400 text-ocean-950 font-bold px-5 py-3 rounded-full text-xs uppercase tracking-wider transition-colors inline-flex items-center space-x-2">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              <span>Traçar Rota no Google Maps</span>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Localiza%C3%A7%C3%A3o%20Recreio%20Shopping%3A%20https%3A%2F%2Fmaps.google.com%2F%3Fq%3DRecreio%2BShopping%2BAv.%2Bdas%2BAm%25C3%25A9ricas%2B19019" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-3 rounded-full text-xs uppercase tracking-wider transition-colors inline-flex items-center space-x-2">
+              <i data-lucide="share-2" class="w-4 h-4"></i>
+              <span>Mandar Localização no WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-ocean-800 rounded-3xl p-4 border border-ocean-700 shadow-2xl relative overflow-hidden flex flex-col space-y-3">
+          <div class="h-80 sm:h-96 w-full rounded-2xl overflow-hidden relative">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.365319859546!2d-43.47352342466044!3d-23.018919179169654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bd8f67499d635%3A0x6b40e3407b99c0d1!2sRecreio%20Shopping!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+              class="w-full h-full border-0 rounded-2xl" 
+              allowfullscreen="" 
+              loading="lazy" 
+              title="Localização Recreio Shopping">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-ocean-950 text-slate-400 pt-12 pb-8 border-t border-ocean-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center space-x-3">
+        <a href="index.html" class="text-white hover:text-gold-400">Página Inicial</a>
+        <span>•</span>
+        <a href="cinema.html" class="text-white hover:text-gold-400">Cinema VIP Laser</a>
+        <span>•</span>
+        <a href="eventos.html" class="text-white hover:text-gold-400">Eventos & Lazer</a>
+        <span>•</span>
+        <a href="lojas.html" class="text-white hover:text-gold-400">Lojas & Gastronomia</a>
+      </div>
+      <p>© 2026 Recreio Shopping. Administrado por ALLOS. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  </div><!-- /#pageContentWrapper -->
+
+  <!-- Modal Fullscreen Map -->
+  <div id="fullscreenMapModal" class="hidden fixed inset-0 z-50 bg-ocean-950/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-white w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[95vh] border border-sand-200">
+      <div class="p-3 sm:p-4 bg-ocean-900 text-white flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-ocean-800 shrink-0">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="map" class="w-5 h-5 text-gold-400"></i>
+          <div>
+            <h3 class="font-bold text-xs sm:text-sm" id="fullscreenModalTitle">Planta Arquitetônica Oficial — Piso L1</h3>
+            <span class="text-[10px] sm:text-[11px] text-slate-300">Alta Resolução</span>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <div class="flex bg-ocean-800 rounded-xl p-1 gap-1 text-xs">
+            <button onclick="changeFloorMap('L1_0')" class="px-2.5 py-1.5 rounded-lg text-white font-bold cursor-pointer" id="fsTabL1_0">L1 Térreo</button>
+            <button onclick="changeFloorMap('L1_1')" class="px-2.5 py-1.5 rounded-lg text-white font-bold cursor-pointer" id="fsTabL1_1">L1 Varanda</button>
+            <button onclick="changeFloorMap('L2')" class="px-2.5 py-1.5 rounded-lg text-white font-bold cursor-pointer" id="fsTabL2">L2</button>
+            <button onclick="changeFloorMap('L3')" class="px-2.5 py-1.5 rounded-lg text-white font-bold cursor-pointer" id="fsTabL3">L3</button>
+          </div>
+          <button onclick="closeFullscreenMap()" class="text-slate-300 hover:text-white w-10 h-10 rounded-xl bg-ocean-800 flex items-center justify-center cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-auto flex-1 p-2 sm:p-4 bg-slate-100 flex items-center justify-center min-h-[300px]">
+        <img id="fullscreenModalImg" src="https://recreioshopping.com.br/data/files/86/F2/57/A6/CDCC2710A2980A27A51BF9C2/mapa_Recreio0.jpg" alt="Planta em Alta Resolução" class="max-w-none w-auto max-h-[75vh] object-contain rounded-xl shadow border border-slate-300">
+      </div>
+
+      <div class="p-3 bg-white border-t border-sand-200 flex items-center justify-between text-xs text-slate-600">
+        <span>Plantas cadastradas pelo departamento de engenharia ALLOS</span>
+        <button onclick="closeFullscreenMap()" class="px-4 py-2 rounded-xl bg-ocean-900 text-white font-bold text-xs cursor-pointer">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Busca -->
+  <div id="searchModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-modal overflow-hidden border border-sand-200 max-h-[85vh] flex flex-col">
+      <div class="p-4 border-b border-sand-200 flex items-center space-x-3 shrink-0">
+        <i data-lucide="search" class="w-5 h-5 text-gold-500 shrink-0"></i>
+        <input type="text" id="modalSearchInput" oninput="handleInstantSearch()" placeholder="Digite o que procura..." class="w-full text-base text-ocean-900 placeholder-slate-400 focus:outline-none">
+        <button onclick="closeSearchModal()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-ocean-900 flex items-center justify-center cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="max-h-96 overflow-y-auto p-4 space-y-2 flex-1" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initLucide();
+      changeFloorMap('L1_0');
+    });
+  </script>
+</body>
+</html>

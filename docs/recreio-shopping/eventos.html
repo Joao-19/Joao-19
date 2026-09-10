@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Agenda de Eventos & Fique por Dentro | Recreio Shopping (ALLOS)</title>
+  <meta name="description" content="Agenda viva de eventos, lazer infantil, shows de música ao vivo, grandes campanhas como Rock in Rio Primeira Classe e comunicados oficiais do Recreio Shopping.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: { 'xs': '420px' },
+          colors: {
+            ocean: { 950: '#040B13', 900: '#07131F', 800: '#0B1B2B', 700: '#14283D', 600: '#1C3957', 500: '#274B72', 100: '#E8F0F8' },
+            gold: { 500: '#C5A059', 400: '#D4AF37', 300: '#E5C07B', 200: '#F2DFB8', 100: '#FAF3E5', 50: '#FDFBF7' },
+            sand: { 50: '#FBF9F5', 100: '#F5EFE6', 200: '#E8DFD3', 300: '#D5C7B5', 800: '#4A4135' },
+            coral: { 500: '#D96B43', 600: '#C25630', 100: '#FCEEE8' },
+            palm: { 600: '#255C50', 500: '#2D7364', 100: '#E7F2EF' }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 27, 43, 0.08), 0 4px 12px -2px rgba(11, 27, 43, 0.04)',
+            'modal': '0 25px 50px -12px rgba(7, 19, 31, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FBF9F5; color: #1E293B; overflow-x: hidden; width: 100%; }
+    .font-serif-lux { font-family: 'Playfair Display', Georgia, serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F5EFE6; }
+    ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 4px; }
+    .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .smooth-card { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .smooth-card:hover { transform: translateY(-4px); }
+
+    /* Transição de Entrada Suave da Página */
+    .page-content-wrapper {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-content-wrapper.page-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-gold-500 selection:text-white">
+
+  <!-- Preloader de Luxo ALLOS (Simulação de 1 Segundo) -->
+  <div id="pagePreloader" class="fixed inset-0 z-[9999] bg-ocean-950 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex flex-col items-center space-y-4 px-4 text-center">
+      <div class="relative">
+        <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-12 sm:h-14 w-auto object-contain brightness-125">
+        <div class="absolute -inset-3 rounded-full bg-gold-500/20 blur-xl animate-pulse pointer-events-none"></div>
+      </div>
+      <div class="w-36 sm:w-48 h-1 bg-ocean-800 rounded-full overflow-hidden relative">
+        <div id="preloaderBar" class="h-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 w-0 rounded-full transition-all duration-1000 ease-out"></div>
+      </div>
+      <span class="text-[10px] sm:text-[11px] font-semibold tracking-widest text-gold-400 uppercase">Carregando Agenda Viva & Ações...</span>
+    </div>
+  </div>
+
+  <div id="pageContentWrapper" class="page-content-wrapper">
+
+  <!-- Status Bar Oficial -->
+  <aside class="bg-ocean-900 text-white text-xs py-2 px-3 sm:px-4 border-b border-ocean-800 sticky top-0 z-50 shadow-sm w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 bg-gold-500/20 text-gold-300 border border-gold-500/40 px-2.5 sm:px-3 py-1 rounded-full font-medium text-[11px] sm:text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+          <span class="font-bold tracking-wide">PROGRAMAÇÃO VIVA</span>
+          <span class="text-ocean-100/80 hidden sm:inline">• Atrações Gratuitas & Lazer</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-3 text-xs text-slate-300">
+        <a href="index.html" class="hover:text-gold-300 transition-colors flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Voltar ao Portal</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="glass-nav border-b border-sand-200/80 sticky top-9 z-40 transition-all duration-300 shadow-sm" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+        <a href="index.html" class="flex items-center space-x-2 sm:space-x-3 group shrink-0">
+          <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-9 sm:h-12 w-auto object-contain">
+        </a>
+
+        <nav class="hidden xl:flex items-center space-x-2 font-medium text-sm text-ocean-800 shrink-0">
+          <a href="index.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Início</a>
+          <a href="cinema.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Cinema VIP</a>
+          <a href="eventos.html" class="px-3.5 py-2 rounded-xl bg-gold-500 text-ocean-950 font-bold transition-colors">Eventos & Lazer</a>
+          <a href="lojas.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Lojas & Gastronomia</a>
+          <a href="shopping.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Shopping & Serviços</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="openSearchModal()" class="w-10 h-10 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 flex items-center justify-center border border-sand-200 transition-colors cursor-pointer">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </button>
+          <a href="https://wa.me/5521999999999?text=Ol%C3%A1%20SAC%20Recreio%20Shopping,%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20eventos" target="_blank" class="bg-ocean-900 hover:bg-ocean-800 text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all shadow-md flex items-center space-x-1.5">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+            <span>Dúvidas no WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Editorial Eventos -->
+  <section class="relative bg-gradient-to-b from-sand-100 via-sand-50 to-sand-100/60 py-14 sm:py-20 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest bg-gold-50 px-3 py-1.5 rounded-full border border-gold-300">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>Agenda Cultural & Comunicação Direta com o Bairro</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif-lux font-medium text-ocean-900 max-w-3xl mx-auto leading-tight">
+        Ações, Grandes Eventos e Lazer para Toda a Família
+      </h1>
+      <p class="text-slate-600 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Descubra tudo o que movimenta o Recreio Shopping. Salve os eventos no calendário do seu celular e acompanhe as matérias e parcerias oficiais do mall.
+      </p>
+
+      <!-- Atalhos de Âncora -->
+      <div class="pt-4 flex items-center justify-center gap-3 text-xs font-bold">
+        <a href="#agenda-eventos" class="px-4 py-2 rounded-full bg-ocean-900 text-white hover:bg-ocean-800 transition-colors">
+          Ir para Agenda de Eventos
+        </a>
+        <a href="#fique-por-dentro" class="px-4 py-2 rounded-full bg-white text-ocean-900 border border-sand-300 hover:bg-sand-100 transition-colors">
+          Ir para Fique por Dentro
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SEÇÃO 1: AGENDA VIVA DE EVENTOS                                           -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="agenda-eventos">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest mb-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Programação Confirmada</span>
+          <span class="w-8 h-px bg-gold-400"></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-serif-lux font-medium text-ocean-900">
+          Agenda Cultural Viva
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm mt-1">
+          Clique no botão para adicionar o evento diretamente à agenda do seu iPhone, Android ou Google Calendar.
+        </p>
+      </div>
+
+      <!-- Filtros de Categorias de Eventos -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="filterEvents('all')" data-type="all" class="event-btn shrink-0 px-4 py-2 rounded-full bg-ocean-900 text-white font-bold text-xs cursor-pointer">
+          Todos os Eventos
+        </button>
+        <button onclick="filterEvents('music')" data-type="music" class="event-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-semibold text-xs cursor-pointer">
+          Música & Sunset
+        </button>
+        <button onclick="filterEvents('kids')" data-type="kids" class="event-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-semibold text-xs cursor-pointer">
+          Infantil & Kids
+        </button>
+        <button onclick="filterEvents('pet')" data-type="pet" class="event-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-200 border border-sand-200 font-semibold text-xs cursor-pointer">
+          Pet Friendly
+        </button>
+      </div>
+    </div>
+
+    <!-- Grid de Eventos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="eventsGrid">
+      <!-- Renderizado via renderEvents() -->
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SEÇÃO 2: FIQUE POR DENTRO (NOTÍCIAS, CAMPANHAS & PROJETOS ALLOS)           -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 bg-sand-100/70 border-t border-sand-200" id="fique-por-dentro">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-purple-600 text-xs font-bold uppercase tracking-widest mb-2">
+            <i data-lucide="newspaper" class="w-4 h-4"></i>
+            <span>Comunicação Institucional & Ações de Peso</span>
+            <span class="w-8 h-px bg-purple-500"></span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif-lux font-medium text-ocean-900">
+            Fique por Dentro do Recreio Shopping
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
+            Matérias completas com as ações sociais, parcerias municipais e estaduais, e grandes campanhas que conectam o shopping à comunidade do Recreio.
+          </p>
+        </div>
+
+        <div class="flex items-center space-x-2 text-xs font-semibold text-slate-500">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Atualizado pelo marketing oficial</span>
+        </div>
+      </div>
+
+      <!-- Grid com todas as 6 matérias -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Matéria 1: Rock in Rio -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/56/95/2D/D6/9A280A104B4CE60AC968F9C2/Banner%20Fique%20por%20dentro%20-%20Desktop%20900x395.jpg.jpeg" alt="Rock In Rio Primeira Classe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Lazer & Grandes Eventos</span>
+                <span class="text-slate-400">Ponto Oficial</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                Rock In Rio | Transporte Primeira Classe no Recreio Shopping
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                Embarque com todo o conforto de ônibus executivos com ar-condicionado direto para a Cidade do Rock. Estacionamento fácil, segurança reforçada e praça de alimentação com horário estendido.
+              </p>
+            </div>
+            <button onclick="openArticleModal(1)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Matéria 2: Semana do Cinema -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/74/90/23/80/47E50A10BB92540ABCDBF9C2/Semana_do_Cinema_900x395.jpg" alt="Semana do Cinema Cinesystem" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Cinema VIP</span>
+                <span class="text-slate-400">Campanha Nacional</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                Semana do Cinema | Cinesystem com Ingressos Promocionais
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                Uma celebração especial à sétima arte: ingressos a preços promocionais e combos exclusivos de pipoca para toda a família curtir as melhores estreias na tela grande do Recreio.
+              </p>
+            </div>
+            <button onclick="openArticleModal(2)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Matéria 3: CastraPet Rio -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/5F/03/AE/EB/95E33810CE8A9338180808FF/Banner%20FPD%20940x380px%20-Pet%20Park.png" alt="CastraPet Rio no Recreio Shopping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Cuidado Animal & Social</span>
+                <span class="text-slate-400">Ação Gratuita</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                CastraPet Rio: Parceria Oficial para Castração Gratuita de Cães e Gatos
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                O Recreio Shopping, em parceria com o Governo do Estado do Rio de Janeiro, recebe a unidade móvel do CastraPet com agendamento online, castração e microchipagem gratuita.
+              </p>
+            </div>
+            <button onclick="openArticleModal(3)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Matéria 4: Festival de Fatias -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/27/30/29/0B/69C7E810BAC9A7E88659F9C2/Banner%20FPD%20940x380px%20-%20Floresta.png" alt="Festival de Fatias Recreio Shopping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Gastronomia</span>
+                <span class="text-slate-400">Varanda Gourmet</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                Festival de Fatias: O Melhor da Pizza e Massas Artesanais
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                Os restaurantes do polo gastronômico apresentam menus exclusivos com criações inéditas de pizzas em fatias, calzones e harmonização de chopp artesanal sob o céu do Recreio.
+              </p>
+            </div>
+            <button onclick="openArticleModal(4)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Matéria 5: Árvore da Esperança -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/49/90/25/8C/943D5910CDF20D59B998F9C2/fique%20por%20dentro%20940%20x%20380.png" alt="Árvore da Esperança Neurovida" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Inclusão & Neurodiversidade</span>
+                <span class="text-slate-400">Parceria Neurovida</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                Em Parceria com a Neurovida: A Árvore da Esperança no Recreio
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                Espaço interativo e beneficente promovendo a conscientização sobre o neurodesenvolvimento infantil, acolhimento a famílias atípicas e arrecadação solidária.
+              </p>
+            </div>
+            <button onclick="openArticleModal(5)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Matéria 6: Empodera Ela -->
+        <article class="smooth-card bg-white rounded-3xl overflow-hidden border border-sand-200 shadow-luxury flex flex-col justify-between group">
+          <div class="relative h-48 overflow-hidden bg-ocean-900">
+            <img src="https://recreioshopping.com.br/data/files/11/A6/E9/89/14680A1027B7480AC968F9C2/WhatsApp%20Image%202026-09-09%20at%2009.41.24.jpeg" alt="Empodera Ela ALLOS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <span class="font-bold uppercase tracking-wider text-ocean-800">Institucional ALLOS</span>
+                <span class="text-slate-400">Movimento Nacional</span>
+              </div>
+              <h3 class="text-lg font-bold text-ocean-900 group-hover:text-gold-600 transition-colors">
+                Empodera Ela: Valorização do Empreendedorismo Feminino
+              </h3>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
+                Workshops gratuitos, feira de talentos liderada por mulheres da Zona Oeste e palestras com lojistas e líderes sobre inovação e liderança.
+              </p>
+            </div>
+            <button onclick="openArticleModal(6)" class="w-full min-h-[42px] py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5 border border-sand-200 cursor-pointer">
+              <span>Ler Matéria Completa</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-gold-500"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-ocean-950 text-slate-400 pt-12 pb-8 border-t border-ocean-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center space-x-3">
+        <a href="index.html" class="text-white hover:text-gold-400">Página Inicial</a>
+        <span>•</span>
+        <a href="cinema.html" class="text-white hover:text-gold-400">Cinema VIP Laser</a>
+        <span>•</span>
+        <a href="lojas.html" class="text-white hover:text-gold-400">Lojas & Gastronomia</a>
+        <span>•</span>
+        <a href="shopping.html" class="text-white hover:text-gold-400">Shopping & Facilidades</a>
+      </div>
+      <p>© 2026 Recreio Shopping. Administrado por ALLOS. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  </div><!-- /#pageContentWrapper -->
+
+  <!-- Modais Compartilhados -->
+  <div id="searchModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-modal overflow-hidden border border-sand-200 max-h-[85vh] flex flex-col">
+      <div class="p-4 border-b border-sand-200 flex items-center space-x-3 shrink-0">
+        <i data-lucide="search" class="w-5 h-5 text-gold-500 shrink-0"></i>
+        <input type="text" id="modalSearchInput" oninput="handleInstantSearch()" placeholder="Digite o que procura..." class="w-full text-base text-ocean-900 placeholder-slate-400 focus:outline-none">
+        <button onclick="closeSearchModal()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-ocean-900 flex items-center justify-center cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="max-h-96 overflow-y-auto p-4 space-y-2 flex-1" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <div id="articleModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-modal overflow-hidden border border-sand-200 animate-in fade-in zoom-in duration-200 max-h-[90vh] flex flex-col">
+      <div class="relative h-48 sm:h-60 bg-ocean-900 overflow-hidden shrink-0">
+        <img id="modalArticleImage" src="" alt="Matéria Oficial" class="w-full h-full object-cover">
+        <button onclick="closeArticleModal()" class="absolute top-3.5 right-3.5 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer z-10">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <span id="modalArticleTag" class="absolute bottom-3 left-3 bg-purple-600 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+          Categoria
+        </span>
+      </div>
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 flex-1">
+        <div class="flex items-center space-x-2 text-xs text-slate-400">
+          <i data-lucide="calendar" class="w-4 h-4 text-purple-500"></i>
+          <span id="modalArticleDate">Data</span>
+          <span>•</span>
+          <span class="text-emerald-600 font-bold">Portal Oficial Recreio Shopping</span>
+        </div>
+        <h3 id="modalArticleTitle" class="text-xl sm:text-2xl font-serif-lux font-bold text-ocean-900 leading-snug"></h3>
+        <div id="modalArticleContent" class="text-xs sm:text-sm text-slate-600 leading-relaxed space-y-3"></div>
+        <div class="pt-4 border-t border-sand-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <span class="text-xs text-slate-500">Compartilhe essa novidade:</span>
+          <a id="modalArticleWhatsAppShare" href="#" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white min-h-[40px] py-2 px-3.5 rounded-xl flex items-center justify-center space-x-1.5 text-xs font-bold transition-colors">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Compartilhar no WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-ocean-900 text-white px-5 py-3 rounded-2xl shadow-luxury border border-gold-400/40 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 pointer-events-none">
+    <i data-lucide="check" class="w-5 h-5 text-emerald-400"></i>
+    <span id="toastMessage" class="text-xs font-semibold">Ação concluída!</span>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initLucide();
+      renderEvents('all', 'eventsGrid');
+    });
+  </script>
+</body>
+</html>

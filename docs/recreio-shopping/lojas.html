@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Lojas & Gastronomia | Recreio Shopping (ALLOS)</title>
+  <meta name="description" content="Diretório completo de lojas e restaurantes do Recreio Shopping. Mais de 140 marcas por piso (L1, L2, L3), Polo Gastronômico Varanda e contato direto via WhatsApp.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: { 'xs': '420px' },
+          colors: {
+            ocean: { 950: '#040B13', 900: '#07131F', 800: '#0B1B2B', 700: '#14283D', 600: '#1C3957', 500: '#274B72', 100: '#E8F0F8' },
+            gold: { 500: '#C5A059', 400: '#D4AF37', 300: '#E5C07B', 200: '#F2DFB8', 100: '#FAF3E5', 50: '#FDFBF7' },
+            sand: { 50: '#FBF9F5', 100: '#F5EFE6', 200: '#E8DFD3', 300: '#D5C7B5', 800: '#4A4135' },
+            coral: { 500: '#D96B43', 600: '#C25630', 100: '#FCEEE8' },
+            palm: { 600: '#255C50', 500: '#2D7364', 100: '#E7F2EF' }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 27, 43, 0.08), 0 4px 12px -2px rgba(11, 27, 43, 0.04)',
+            'modal': '0 25px 50px -12px rgba(7, 19, 31, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FBF9F5; color: #1E293B; overflow-x: hidden; width: 100%; }
+    .font-serif-lux { font-family: 'Playfair Display', Georgia, serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F5EFE6; }
+    ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 4px; }
+    .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .smooth-card { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .smooth-card:hover { transform: translateY(-4px); }
+
+    /* Transição de Entrada Suave da Página */
+    .page-content-wrapper {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-content-wrapper.page-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-gold-500 selection:text-white">
+
+  <!-- Preloader de Luxo ALLOS (Simulação de 1 Segundo) -->
+  <div id="pagePreloader" class="fixed inset-0 z-[9999] bg-ocean-950 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex flex-col items-center space-y-4 px-4 text-center">
+      <div class="relative">
+        <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-12 sm:h-14 w-auto object-contain brightness-125">
+        <div class="absolute -inset-3 rounded-full bg-gold-500/20 blur-xl animate-pulse pointer-events-none"></div>
+      </div>
+      <div class="w-36 sm:w-48 h-1 bg-ocean-800 rounded-full overflow-hidden relative">
+        <div id="preloaderBar" class="h-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-500 w-0 rounded-full transition-all duration-1000 ease-out"></div>
+      </div>
+      <span class="text-[10px] sm:text-[11px] font-semibold tracking-widest text-gold-400 uppercase">Carregando Vitrine de Lojas...</span>
+    </div>
+  </div>
+
+  <div id="pageContentWrapper" class="page-content-wrapper">
+
+  <!-- Status Bar Oficial -->
+  <aside class="bg-ocean-900 text-white text-xs py-2 px-3 sm:px-4 border-b border-ocean-800 sticky top-0 z-50 shadow-sm w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2.5 sm:px-3 py-1 rounded-full font-medium text-[11px] sm:text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
+          <span class="font-bold tracking-wide">LOJAS ABERTAS HOJE</span>
+          <span class="text-ocean-100/80 hidden sm:inline">• 10h às 22h</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-3 text-xs text-slate-300">
+        <a href="index.html" class="hover:text-gold-300 transition-colors flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Voltar ao Portal</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="glass-nav border-b border-sand-200/80 sticky top-9 z-40 transition-all duration-300 shadow-sm" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+        <a href="index.html" class="flex items-center space-x-2 sm:space-x-3 group shrink-0">
+          <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-9 sm:h-12 w-auto object-contain">
+        </a>
+
+        <nav class="hidden xl:flex items-center space-x-2 font-medium text-sm text-ocean-800 shrink-0">
+          <a href="index.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Início</a>
+          <a href="cinema.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Cinema VIP</a>
+          <a href="eventos.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Eventos & Lazer</a>
+          <a href="lojas.html" class="px-3.5 py-2 rounded-xl bg-gold-500 text-ocean-950 font-bold transition-colors">Lojas & Gastronomia</a>
+          <a href="shopping.html" class="px-3.5 py-2 rounded-xl hover:text-gold-500 transition-colors">Shopping & Serviços</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="openSearchModal()" class="w-10 h-10 rounded-xl bg-sand-100 hover:bg-sand-200 text-ocean-900 flex items-center justify-center border border-sand-200 transition-colors cursor-pointer">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </button>
+          <a href="https://wa.me/5521999999999?text=Ol%C3%A1%20Concierge%20Recreio%20Shopping" target="_blank" class="bg-ocean-900 hover:bg-ocean-800 text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all shadow-md flex items-center space-x-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-gold-300"></i>
+            <span>Concierge VIP</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header do Diretório -->
+  <section class="relative bg-gradient-to-b from-sand-100 via-sand-50 to-sand-100/60 py-12 sm:py-16 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 text-gold-600 text-xs font-bold uppercase tracking-widest bg-gold-50 px-3 py-1.5 rounded-full border border-gold-300">
+        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+        <span>Vitrine Digital Omnichannel com WhatsApp Direct</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-serif-lux font-medium text-ocean-900 max-w-3xl mx-auto leading-tight">
+        Guia Completo de Lojas & Marcas
+      </h1>
+      <p class="text-slate-600 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Encontre sua marca favorita, localize o piso (L1, L2 ou L3) e inicie conversa diretamente com o canal de vendas do lojista no WhatsApp.
+      </p>
+
+      <!-- Input de Busca Integrado no Topo -->
+      <div class="pt-4 max-w-xl mx-auto">
+        <div class="relative flex items-center">
+          <input 
+            type="text" 
+            id="storeSearchInput" 
+            oninput="filterStores()" 
+            placeholder="Digite o nome da loja, marca ou produto..." 
+            class="w-full bg-white text-ocean-900 placeholder-slate-400 text-sm pl-11 pr-4 py-3.5 rounded-2xl border border-sand-300 shadow-luxury focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-400/20 transition-all"
+          >
+          <div class="absolute left-4 pointer-events-none text-slate-400 flex items-center">
+            <i data-lucide="search" class="w-5 h-5 text-gold-600"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros Duplos: Por Piso & Por Categoria -->
+      <div class="pt-4 space-y-3">
+        <!-- Filtros por Piso -->
+        <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <span class="text-xs font-bold text-slate-500 mr-1 hidden sm:inline">Piso:</span>
+          <button onclick="setFloorFilter('all')" data-floor="all" class="floor-btn shrink-0 px-4 py-2 rounded-full bg-ocean-900 text-white font-bold text-xs cursor-pointer">
+            Todos os Pisos
+          </button>
+          <button onclick="setFloorFilter('L1')" data-floor="L1" class="floor-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-bold text-xs cursor-pointer">
+            Piso L1 (Térreo & Varanda)
+          </button>
+          <button onclick="setFloorFilter('L2')" data-floor="L2" class="floor-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-bold text-xs cursor-pointer">
+            Piso L2 (Moda & Lazer)
+          </button>
+          <button onclick="setFloorFilter('L3')" data-floor="L3" class="floor-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-bold text-xs cursor-pointer">
+            Piso L3 (Cinema & Serviços)
+          </button>
+        </div>
+
+        <!-- Filtros por Categoria -->
+        <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <button onclick="setCategoryFilter('all')" data-cat="all" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-gold-500 text-ocean-900 font-bold text-xs cursor-pointer">
+            Todas as Categorias
+          </button>
+          <button onclick="setCategoryFilter('Moda')" data-cat="Moda" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-white text-slate-600 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Moda & Acessórios
+          </button>
+          <button onclick="setCategoryFilter('Gastronomia')" data-cat="Gastronomia" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-white text-slate-600 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Gastronomia
+          </button>
+          <button onclick="setCategoryFilter('Beleza')" data-cat="Beleza" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-white text-slate-600 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Beleza & Cosméticos
+          </button>
+          <button onclick="setCategoryFilter('Serviços')" data-cat="Serviços" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-white text-slate-600 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Serviços & Supermercado
+          </button>
+          <button onclick="setCategoryFilter('Lazer')" data-cat="Lazer" class="category-btn shrink-0 px-3.5 py-1.5 rounded-full bg-white text-slate-600 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Lazer & Pet
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Grade de Lojas -->
+  <main class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-8 pb-3 border-b border-sand-200">
+      <h2 class="text-xl sm:text-2xl font-bold text-ocean-900">Operações Cadastradas</h2>
+      <button onclick="resetStoreFilters()" class="text-xs font-semibold text-gold-600 hover:text-gold-700 underline cursor-pointer">
+        Limpar Filtros
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="storesGrid">
+      <!-- Renderizado via renderStores() -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="noStoresFound" class="hidden text-center py-16 space-y-4">
+      <div class="w-16 h-16 bg-sand-200 rounded-full flex items-center justify-center mx-auto text-slate-500">
+        <i data-lucide="search-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-bold text-ocean-900">Nenhuma loja encontrada</h3>
+      <p class="text-xs text-slate-500">Tente buscar por outro termo ou remova os filtros selecionados.</p>
+      <button onclick="resetStoreFilters()" class="px-5 py-2.5 rounded-xl bg-gold-500 text-ocean-950 font-bold text-xs">
+        Ver Todas as Lojas
+      </button>
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SEÇÃO GASTRONOMIA: POLO VARANDA GOURMET & RESERVAS                        -->
+  <!-- ========================================================================= -->
+  <section class="py-14 sm:py-20 bg-sand-100/70 border-t border-sand-200" id="gastronomia">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="inline-flex items-center space-x-2 text-palm-600 text-xs font-bold uppercase tracking-widest mb-2">
+            <i data-lucide="utensils" class="w-4 h-4"></i>
+            <span>Varanda Gourmet ao Ar Livre</span>
+            <span class="w-8 h-px bg-palm-500"></span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif-lux font-medium text-ocean-900">
+            Polo Gastronômico do Recreio
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm mt-1 max-w-xl">
+            Desfrute de cafés nobres, gelatos artesanais, culinária japonesa contemporânea e pizzas de fermentação lenta com vista panorâmica.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <button onclick="filterDining('all')" data-filter="all" class="dining-btn shrink-0 px-4 py-2 rounded-full bg-palm-600 text-white font-bold text-xs cursor-pointer">
+            Todos
+          </button>
+          <button onclick="filterDining('varanda')" data-filter="varanda" class="dining-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Varanda ao Ar Livre
+          </button>
+          <button onclick="filterDining('cafes')" data-filter="cafes" class="dining-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Cafés & Gelatos
+          </button>
+          <button onclick="filterDining('happyhour')" data-filter="happyhour" class="dining-btn shrink-0 px-4 py-2 rounded-full bg-white text-slate-700 hover:bg-sand-100 border border-sand-200 font-semibold text-xs cursor-pointer">
+            Fast Casual
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="diningGrid">
+        <!-- Renderizado via renderDining() -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer ALLOS -->
+  <footer class="bg-ocean-950 text-slate-400 pt-12 pb-8 border-t border-ocean-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center space-x-3">
+        <a href="index.html" class="text-white hover:text-gold-400">Página Inicial</a>
+        <span>•</span>
+        <a href="cinema.html" class="text-white hover:text-gold-400">Cinema VIP Laser</a>
+        <span>•</span>
+        <a href="eventos.html" class="text-white hover:text-gold-400">Eventos & Lazer</a>
+        <span>•</span>
+        <a href="shopping.html" class="text-white hover:text-gold-400">Shopping & Facilidades</a>
+      </div>
+      <p>© 2026 Recreio Shopping. Administrado por ALLOS. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  </div><!-- /#pageContentWrapper -->
+
+  <!-- Modais Compartilhados -->
+  <div id="searchModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-modal overflow-hidden border border-sand-200 max-h-[85vh] flex flex-col">
+      <div class="p-4 border-b border-sand-200 flex items-center space-x-3 shrink-0">
+        <i data-lucide="search" class="w-5 h-5 text-gold-500 shrink-0"></i>
+        <input type="text" id="modalSearchInput" oninput="handleInstantSearch()" placeholder="Digite o que procura..." class="w-full text-base text-ocean-900 placeholder-slate-400 focus:outline-none">
+        <button onclick="closeSearchModal()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-ocean-900 flex items-center justify-center cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="max-h-96 overflow-y-auto p-4 space-y-2 flex-1" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <div id="storeModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl shadow-modal overflow-hidden border border-sand-200 animate-in fade-in zoom-in duration-200 max-h-[92vh] flex flex-col">
+      <div class="relative h-44 sm:h-48 bg-ocean-900 overflow-hidden shrink-0">
+        <img id="modalStoreImage" src="" alt="Loja" class="w-full h-full object-cover">
+        <button onclick="closeStoreModal()" class="absolute top-3.5 right-3.5 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer z-10">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <span id="modalStoreCategoryBadge" class="absolute bottom-3 left-3 bg-white text-ocean-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+          Categoria
+        </span>
+      </div>
+      <div class="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 id="modalStoreTitle" class="text-2xl font-bold text-ocean-900">Nome da Loja</h3>
+            <p id="modalStoreFloor" class="text-xs font-semibold text-gold-500 flex items-center space-x-1 mt-0.5"></p>
+          </div>
+          <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0">Aberto Agora</span>
+        </div>
+        <p id="modalStoreDescription" class="text-sm text-slate-600 leading-relaxed"></p>
+        <div class="bg-sand-50 p-3.5 rounded-xl border border-sand-200/80 space-y-2 text-xs text-slate-600">
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Horário Hoje:</span>
+            <span class="font-bold text-ocean-900" id="modalStoreHours">10h às 22h</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Aceita Pet:</span>
+            <span class="font-bold text-palm-600" id="modalStorePet">Sim</span>
+          </div>
+        </div>
+        <div class="pt-2">
+          <a id="modalStoreWhatsAppBtn" href="#" target="_blank" class="w-full min-h-[44px] bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-md">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            <span>Iniciar Conversa no WhatsApp da Loja</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initLucide();
+      renderStores('storesGrid');
+      renderDining('all', 'diningGrid');
+    });
+  </script>
+</body>
+</html>

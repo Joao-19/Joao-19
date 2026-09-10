@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Cinema Cinesystem VIP Laser | Recreio Shopping (ALLOS)</title>
+  <meta name="description" content="Programação completa do Cinesystem Recreio Shopping. 6 salas digitais com tecnologia Laser 4K, poltronas VIP reclináveis, som Dolby Atmos e trailers das principais estreias no Recreio dos Bandeirantes.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍿</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: { 'xs': '420px' },
+          colors: {
+            ocean: { 950: '#040B13', 900: '#07131F', 800: '#0B1B2B', 700: '#14283D', 600: '#1C3957', 500: '#274B72', 100: '#E8F0F8' },
+            gold: { 500: '#C5A059', 400: '#D4AF37', 300: '#E5C07B', 200: '#F2DFB8', 100: '#FAF3E5', 50: '#FDFBF7' },
+            sand: { 50: '#FBF9F5', 100: '#F5EFE6', 200: '#E8DFD3', 300: '#D5C7B5', 800: '#4A4135' },
+            coral: { 500: '#D96B43', 600: '#C25630', 100: '#FCEEE8' },
+            palm: { 600: '#255C50', 500: '#2D7364', 100: '#E7F2EF' }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            'luxury': '0 10px 30px -10px rgba(11, 27, 43, 0.08), 0 4px 12px -2px rgba(11, 27, 43, 0.04)',
+            'modal': '0 25px 50px -12px rgba(7, 19, 31, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    html { overflow-x: hidden; scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #07131F; color: #F8FAFC; overflow-x: hidden; width: 100%; }
+    .font-serif-lux { font-family: 'Playfair Display', Georgia, serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0B1B2B; }
+    ::-webkit-scrollbar-thumb { background: #D96B43; border-radius: 4px; }
+    .glass-nav { background: rgba(7, 19, 31, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .smooth-card { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .smooth-card:hover { transform: translateY(-4px); }
+
+    /* Transição de Entrada Suave da Página */
+    .page-content-wrapper {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-content-wrapper.page-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-coral-500 selection:text-white">
+
+  <!-- Preloader de Luxo ALLOS (Simulação de 1 Segundo) -->
+  <div id="pagePreloader" class="fixed inset-0 z-[9999] bg-ocean-950 flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="relative flex flex-col items-center space-y-4 px-4 text-center">
+      <div class="relative">
+        <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-12 sm:h-14 w-auto object-contain brightness-125">
+        <div class="absolute -inset-3 rounded-full bg-coral-500/20 blur-xl animate-pulse pointer-events-none"></div>
+      </div>
+      <div class="w-36 sm:w-48 h-1 bg-ocean-800 rounded-full overflow-hidden relative">
+        <div id="preloaderBar" class="h-full bg-gradient-to-r from-coral-500 via-gold-300 to-coral-500 w-0 rounded-full transition-all duration-1000 ease-out"></div>
+      </div>
+      <span class="text-[10px] sm:text-[11px] font-semibold tracking-widest text-coral-400 uppercase">Carregando Cinesystem VIP Laser...</span>
+    </div>
+  </div>
+
+  <div id="pageContentWrapper" class="page-content-wrapper">
+
+  <!-- Status Bar Oficial -->
+  <aside class="bg-ocean-950 text-white text-xs py-2 px-3 sm:px-4 border-b border-ocean-800/80 sticky top-0 z-50 shadow-sm w-full overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+        <a href="index.html" class="inline-flex items-center space-x-1.5 bg-coral-500/20 text-coral-300 border border-coral-500/40 px-2.5 sm:px-3 py-1 rounded-full font-medium text-[11px] sm:text-xs">
+          <span class="w-2 h-2 rounded-full bg-coral-400 animate-pulse inline-block"></span>
+          <span class="font-bold tracking-wide">CINESYSTEM VIP LASER</span>
+          <span class="text-ocean-100/80 hidden sm:inline">• Bilheterias Abertas</span>
+        </a>
+        <span class="hidden md:inline-block text-slate-500">|</span>
+        <span class="hidden md:flex items-center text-slate-300 space-x-1.5 text-xs">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gold-400"></i>
+          <span>Piso L3 • Recreio Shopping</span>
+        </span>
+      </div>
+      <div class="flex items-center space-x-3 text-xs text-slate-300">
+        <a href="index.html" class="hover:text-gold-300 transition-colors flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Voltar ao Portal</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header com Navegação Interna -->
+  <header class="glass-nav border-b border-ocean-800 sticky top-9 z-40 transition-all duration-300 shadow-md" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
+        <a href="index.html" class="flex items-center space-x-2 sm:space-x-3 group shrink-0">
+          <img src="https://recreioshopping.com.br/data/files/CF/63/B7/0B/2757D910FB1BA6D92698F9C2/Design%20sem%20nome%20_8_.png" alt="Recreio Shopping ALLOS" class="h-9 sm:h-12 w-auto object-contain brightness-110">
+        </a>
+
+        <nav class="hidden xl:flex items-center space-x-2 font-medium text-sm text-slate-200 shrink-0">
+          <a href="index.html" class="px-3.5 py-2 rounded-xl hover:text-gold-400 transition-colors">Início</a>
+          <a href="cinema.html" class="px-3.5 py-2 rounded-xl bg-coral-500 text-white font-bold transition-colors">Cinema VIP</a>
+          <a href="eventos.html" class="px-3.5 py-2 rounded-xl hover:text-gold-400 transition-colors">Eventos & Lazer</a>
+          <a href="lojas.html" class="px-3.5 py-2 rounded-xl hover:text-gold-400 transition-colors">Lojas & Gastronomia</a>
+          <a href="shopping.html" class="px-3.5 py-2 rounded-xl hover:text-gold-400 transition-colors">Shopping & Serviços</a>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <button onclick="openSearchModal()" class="w-10 h-10 rounded-xl bg-ocean-800 hover:bg-ocean-700 text-white flex items-center justify-center border border-ocean-700 transition-colors cursor-pointer">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </button>
+          <a href="https://www.cinesystem.com.br" target="_blank" class="bg-coral-500 hover:bg-coral-600 text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all shadow-md flex items-center space-x-1.5">
+            <i data-lucide="ticket" class="w-4 h-4"></i>
+            <span>Comprar Ingressos</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Editorial Cinema -->
+  <section class="relative bg-gradient-to-b from-ocean-950 via-ocean-900 to-ocean-950 py-16 sm:py-24 border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="inline-flex items-center space-x-2 text-coral-400 text-xs font-bold uppercase tracking-widest bg-coral-500/10 px-3 py-1.5 rounded-full border border-coral-500/20">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>6 Salas Laser 4K • Poltronas Reclináveis VIP • Som Dolby</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-lux font-medium text-white max-w-3xl mx-auto leading-tight">
+        A Magia do Cinema com Conforto de Primeira Linha
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Confira a programação completa de filmes em exibição no Cinesystem Recreio Shopping. Escolha seu dia, assista aos trailers e compre seus ingressos online.
+      </p>
+
+      <!-- Seletor de Dias -->
+      <div class="pt-6 flex flex-wrap items-center justify-center gap-2">
+        <button onclick="setCinemaDay('today')" data-day="today" class="cinema-day-btn px-5 py-2.5 rounded-full bg-coral-500 text-white font-bold transition-all cursor-pointer text-xs sm:text-sm">
+          Hoje
+        </button>
+        <button onclick="setCinemaDay('tomorrow')" data-day="tomorrow" class="cinema-day-btn px-5 py-2.5 rounded-full text-slate-300 hover:text-white bg-ocean-800/80 hover:bg-ocean-700 transition-all font-medium cursor-pointer text-xs sm:text-sm">
+          Amanhã
+        </button>
+        <button onclick="setCinemaDay('weekend')" data-day="weekend" class="cinema-day-btn px-5 py-2.5 rounded-full text-slate-300 hover:text-white bg-ocean-800/80 hover:bg-ocean-700 transition-all font-medium cursor-pointer text-xs sm:text-sm">
+          Fim de Semana
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grade de Filmes em Cartaz -->
+  <main class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-10 pb-4 border-b border-ocean-800">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-serif-lux font-bold text-white">Todos os Filmes em Exibição</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Horários atualizados diariamente com salas VIP Laser e som imersivo.</p>
+      </div>
+      <span class="text-xs text-coral-400 font-semibold flex items-center gap-1.5">
+        <i data-lucide="video" class="w-4 h-4"></i>
+        <span>Clique nos pôsteres para assistir ao trailer</span>
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="moviesGrid">
+      <!-- Renderizado via renderMovies('moviesGrid') -->
+    </div>
+  </main>
+
+  <!-- Destaques Tecnológicos Cinesystem -->
+  <section class="py-14 bg-ocean-900 border-t border-ocean-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-ocean-950 p-6 rounded-2xl border border-ocean-800 space-y-2">
+          <div class="w-12 h-12 rounded-xl bg-coral-500/20 text-coral-400 flex items-center justify-center mb-3">
+            <i data-lucide="tv" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base">Projeção Laser 4K</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Cores ultrarrealistas, contraste puro e nitidez cristalina em telas gigantes.</p>
+        </div>
+
+        <div class="bg-ocean-950 p-6 rounded-2xl border border-ocean-800 space-y-2">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center mb-3">
+            <i data-lucide="armchair" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base">Poltronas VIP Reclináveis</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Assentos elétricos de couro macio com descanso para os pés e mesa articulada.</p>
+        </div>
+
+        <div class="bg-ocean-950 p-6 rounded-2xl border border-ocean-800 space-y-2">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-3">
+            <i data-lucide="volume-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base">Som Imersivo Dolby</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Áudio multidimensional que envolve cada espectador em uma experiência sonora inesquecível.</p>
+        </div>
+
+        <div class="bg-ocean-950 p-6 rounded-2xl border border-ocean-800 space-y-2">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
+            <i data-lucide="coffee" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-base">Bomboniere Gourmet</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Pipoca amanteigada quentinha, doces finos, bebidas premium e combos temáticos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer ALLOS -->
+  <footer class="bg-ocean-950 text-slate-400 pt-12 pb-8 border-t border-ocean-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <div class="flex items-center justify-center space-x-3">
+        <a href="index.html" class="text-white hover:text-gold-400">Página Inicial</a>
+        <span>•</span>
+        <a href="eventos.html" class="text-white hover:text-gold-400">Eventos</a>
+        <span>•</span>
+        <a href="lojas.html" class="text-white hover:text-gold-400">Lojas & Gastronomia</a>
+        <span>•</span>
+        <a href="shopping.html" class="text-white hover:text-gold-400">Shopping & Facilidades</a>
+      </div>
+      <p>© 2026 Recreio Shopping. Administrado por ALLOS. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  </div><!-- /#pageContentWrapper -->
+
+  <!-- Modais Reutilizados -->
+  <div id="searchModal" class="hidden fixed inset-0 z-50 bg-ocean-950/80 backdrop-blur-md flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4">
+    <div class="bg-white text-ocean-900 w-full max-w-2xl rounded-2xl shadow-modal overflow-hidden border border-sand-200 max-h-[85vh] flex flex-col">
+      <div class="p-4 border-b border-sand-200 flex items-center space-x-3 shrink-0">
+        <i data-lucide="search" class="w-5 h-5 text-gold-500 shrink-0"></i>
+        <input type="text" id="modalSearchInput" oninput="handleInstantSearch()" placeholder="Digite o que procura..." class="w-full text-base text-ocean-900 placeholder-slate-400 focus:outline-none">
+        <button onclick="closeSearchModal()" class="w-10 h-10 rounded-xl text-slate-400 hover:text-ocean-900 flex items-center justify-center cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="max-h-96 overflow-y-auto p-4 space-y-2 flex-1" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <div id="movieTrailerModal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-ocean-950 w-full max-w-3xl rounded-2xl overflow-hidden border border-ocean-700 shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-ocean-800">
+        <div class="flex items-center space-x-2 text-white">
+          <i data-lucide="film" class="w-5 h-5 text-coral-500"></i>
+          <span id="trailerMovieTitle" class="font-bold text-sm">Trailer do Filme</span>
+        </div>
+        <button onclick="closeTrailerModal()" class="text-slate-400 hover:text-white w-10 h-10 rounded-xl hover:bg-ocean-800 flex items-center justify-center transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="aspect-video w-full bg-black">
+        <iframe id="trailerIframe" class="w-full h-full" src="" title="Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-ocean-900 text-white px-5 py-3 rounded-2xl shadow-luxury border border-coral-400/40 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-3 pointer-events-none">
+    <i data-lucide="check" class="w-5 h-5 text-coral-400"></i>
+    <span id="toastMessage" class="text-xs font-semibold">Ação concluída!</span>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initLucide();
+      renderMovies('moviesGrid');
+    });
+  </script>
+</body>
+</html>
