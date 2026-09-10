@@ -49,6 +49,7 @@ function initPageLoader() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initPageLoader();
+  initIaraBot();
 });
 
 /* =========================================================================
@@ -861,5 +862,381 @@ document.addEventListener('keydown', (e) => {
     closeTrailerModal();
     closeFullscreenMap();
     closeArticleModal();
+    closeIaraChat();
   }
 });
+
+/* =========================================================================
+   17. IARA — SISTEMA DE ATENDIMENTO VIRTUAL INTELIGENTE (ALLOS)
+   ========================================================================= */
+
+function initIaraBot() {
+  if (document.getElementById('iaraBotLauncherContainer')) {
+    initLucide();
+    return;
+  }
+
+  const container = document.createElement('div');
+  container.innerHTML = `
+    <!-- Launcher Flutuante IARA -->
+    <div id="iaraBotLauncherContainer" class="fixed bottom-5 right-5 z-40 flex items-center space-x-2">
+      <!-- Speech bubble oficial IARA -->
+      <div onclick="openIaraChat()" class="cursor-pointer hidden sm:flex items-center space-x-2 bg-white/95 backdrop-blur-md text-ocean-950 px-3.5 py-2 rounded-2xl shadow-xl border border-gold-400/40 hover:scale-105 transition-all">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs font-semibold">Olá, precisa de ajuda?</span>
+        <span class="bg-ocean-900 text-gold-300 font-extrabold text-[10px] px-2 py-0.5 rounded-full tracking-wider">IARA</span>
+      </div>
+
+      <!-- Botão Circular do Bot -->
+      <button 
+        onclick="toggleIaraChat()" 
+        id="iaraLauncherBtn" 
+        aria-label="Abrir Atendimento Virtual IARA" 
+        class="relative bg-gradient-to-br from-ocean-900 via-ocean-950 to-ocean-900 hover:from-ocean-800 hover:to-ocean-900 text-white p-3.5 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center border-2 border-gold-400/60 group cursor-pointer"
+      >
+        <div class="relative flex items-center justify-center">
+          <i data-lucide="bot" class="w-6 h-6 text-gold-400 group-hover:rotate-12 transition-transform"></i>
+          <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-ocean-950 animate-pulse"></span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Modal / Janela Flutuante do Chat IARA -->
+    <div id="iaraChatWidget" class="hidden fixed bottom-5 right-5 z-50 w-96 max-w-[calc(100vw-32px)] h-[540px] max-h-[85vh] bg-white rounded-3xl shadow-2xl border border-sand-200 flex flex-col overflow-hidden transition-all">
+      <!-- Header do Chat -->
+      <div class="bg-gradient-to-r from-ocean-950 via-ocean-900 to-ocean-950 text-white p-3.5 border-b border-gold-500/30 flex items-center justify-between shrink-0 shadow-sm">
+        <div class="flex items-center space-x-2.5">
+          <div class="relative w-9 h-9 rounded-full bg-gold-500/20 border border-gold-400/60 flex items-center justify-center shrink-0">
+            <i data-lucide="bot" class="w-5 h-5 text-gold-300"></i>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-ocean-950 animate-pulse"></span>
+          </div>
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="font-bold text-sm text-white tracking-wide">IARA</span>
+              <span class="text-[9px] font-extrabold uppercase bg-gold-500/30 text-gold-300 px-1.5 py-0.5 rounded-md tracking-wider">ALLOS IA</span>
+            </div>
+            <p class="text-[11px] text-slate-300">Assistente Virtual • Recreio Shopping</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1">
+          <button onclick="resetIaraChat()" title="Reiniciar conversa" class="text-slate-300 hover:text-white p-1.5 rounded-lg hover:bg-ocean-800 transition-colors cursor-pointer">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+          <button onclick="closeIaraChat()" title="Fechar chat" class="text-slate-300 hover:text-white p-1.5 rounded-lg hover:bg-ocean-800 transition-colors cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Feed de Mensagens -->
+      <div id="iaraChatMessages" class="flex-1 overflow-y-auto p-3.5 space-y-3 bg-sand-50/60 text-xs">
+        <!-- Mensagem Inicial de Boas-vindas -->
+        <div class="flex items-start space-x-2">
+          <div class="w-7 h-7 rounded-full bg-ocean-900 text-gold-400 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-white border border-sand-200 rounded-2xl rounded-tl-none p-3 text-slate-800 shadow-xs max-w-[85%] space-y-1.5">
+            <p class="font-medium text-ocean-950">Olá! Sou a <strong>IARA</strong>, a assistente virtual e inteligência artificial do <strong>Recreio Shopping</strong> (ALLOS). ✨</p>
+            <p class="text-slate-600">Estou disponível 24 horas para ajudar você com lojas, cinema, gastronomia, horários e atrações do shopping. Como posso te orientar?</p>
+          </div>
+        </div>
+
+        <!-- Quick Chips Iniciais -->
+        <div id="iaraDefaultChips" class="space-y-1.5 pt-1">
+          <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Atalhos rápidos:</p>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="handleIaraChip('🕒 Horários de Funcionamento')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🕒 Horários</button>
+            <button onclick="handleIaraChip('🎬 Filmes no Cinema')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🎬 Cinema VIP</button>
+            <button onclick="handleIaraChip('🛍️ Lojas & Marcas')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🛍️ Lojas</button>
+            <button onclick="handleIaraChip('🍽️ Polo Gastronômico')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🍽️ Restaurantes</button>
+            <button onclick="handleIaraChip('📅 Eventos no Mall')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">📅 Eventos</button>
+            <button onclick="handleIaraChip('🐾 Regras Pet Friendly')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🐾 Pet Friendly</button>
+            <button onclick="handleIaraChip('🚗 Estacionamento & BRT')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🚗 Estacionamento</button>
+            <button onclick="handleIaraChip('💬 WhatsApp de Atendimento')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">💬 WhatsApp (+55 21 4040-2274)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário de Envio -->
+      <form onsubmit="handleIaraSubmit(event)" class="p-2.5 bg-white border-t border-sand-200 flex items-center space-x-2 shrink-0">
+        <input 
+          type="text" 
+          id="iaraChatInput" 
+          placeholder="Digite sua dúvida para a IARA..." 
+          class="flex-1 bg-sand-50 border border-sand-200 rounded-full px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-gold-500 transition-colors"
+          autocomplete="off"
+        >
+        <button 
+          type="submit" 
+          aria-label="Enviar mensagem" 
+          class="bg-ocean-900 hover:bg-ocean-800 text-gold-400 w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0 shadow-xs cursor-pointer"
+        >
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(container);
+  initLucide();
+}
+
+function toggleIaraChat() {
+  const widget = document.getElementById('iaraChatWidget');
+  if (!widget) {
+    initIaraBot();
+    return toggleIaraChat();
+  }
+  if (widget.classList.contains('hidden')) {
+    openIaraChat();
+  } else {
+    closeIaraChat();
+  }
+}
+
+function openIaraChat() {
+  const widget = document.getElementById('iaraChatWidget');
+  if (!widget) {
+    initIaraBot();
+    return openIaraChat();
+  }
+  widget.classList.remove('hidden');
+  initLucide();
+  const input = document.getElementById('iaraChatInput');
+  if (input) input.focus();
+  scrollIaraToBottom();
+}
+
+function closeIaraChat() {
+  const widget = document.getElementById('iaraChatWidget');
+  if (widget) {
+    widget.classList.add('hidden');
+  }
+}
+
+function scrollIaraToBottom() {
+  const messages = document.getElementById('iaraChatMessages');
+  if (messages) {
+    messages.scrollTop = messages.scrollHeight;
+  }
+}
+
+function resetIaraChat() {
+  const messages = document.getElementById('iaraChatMessages');
+  if (!messages) return;
+  messages.innerHTML = `
+    <div class="flex items-start space-x-2">
+      <div class="w-7 h-7 rounded-full bg-ocean-900 text-gold-400 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+        <i data-lucide="bot" class="w-4 h-4"></i>
+      </div>
+      <div class="bg-white border border-sand-200 rounded-2xl rounded-tl-none p-3 text-slate-800 shadow-xs max-w-[85%] space-y-1.5">
+        <p class="font-medium text-ocean-950">Conversa reiniciada! Sou a <strong>IARA</strong>, assistente virtual do Recreio Shopping. ✨</p>
+        <p class="text-slate-600">Como posso te ajudar agora?</p>
+      </div>
+    </div>
+    <div id="iaraDefaultChips" class="space-y-1.5 pt-1">
+      <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Atalhos rápidos:</p>
+      <div class="flex flex-wrap gap-1.5">
+        <button onclick="handleIaraChip('🕒 Horários de Funcionamento')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🕒 Horários</button>
+        <button onclick="handleIaraChip('🎬 Filmes no Cinema')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🎬 Cinema VIP</button>
+        <button onclick="handleIaraChip('🛍️ Lojas & Marcas')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🛍️ Lojas</button>
+        <button onclick="handleIaraChip('🍽️ Polo Gastronômico')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🍽️ Restaurantes</button>
+        <button onclick="handleIaraChip('📅 Eventos no Mall')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">📅 Eventos</button>
+        <button onclick="handleIaraChip('🐾 Regras Pet Friendly')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🐾 Pet Friendly</button>
+        <button onclick="handleIaraChip('🚗 Estacionamento & BRT')" class="bg-white hover:bg-gold-50 text-ocean-900 border border-sand-200 hover:border-gold-400 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">🚗 Estacionamento</button>
+        <button onclick="handleIaraChip('💬 WhatsApp de Atendimento')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer shadow-2xs">💬 WhatsApp (+55 21 4040-2274)</button>
+      </div>
+    </div>
+  `;
+  initLucide();
+}
+
+function handleIaraSubmit(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById('iaraChatInput');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  processIaraMessage(text);
+}
+
+function handleIaraChip(text) {
+  processIaraMessage(text);
+}
+
+function processIaraMessage(userText) {
+  const messages = document.getElementById('iaraChatMessages');
+  if (!messages) return;
+
+  // 1. Renderiza mensagem do usuário
+  const userBubble = document.createElement('div');
+  userBubble.className = 'flex justify-end';
+  userBubble.innerHTML = `
+    <div class="bg-ocean-900 text-white rounded-2xl rounded-tr-none px-3.5 py-2 shadow-xs max-w-[85%] text-slate-100 font-medium">
+      ${userText}
+    </div>
+  `;
+  messages.appendChild(userBubble);
+  scrollIaraToBottom();
+
+  // 2. Typing indicator simulando raciocínio da IA (400ms)
+  const typingId = 'typing_' + Date.now();
+  const typingBubble = document.createElement('div');
+  typingBubble.id = typingId;
+  typingBubble.className = 'flex items-start space-x-2';
+  typingBubble.innerHTML = `
+    <div class="w-7 h-7 rounded-full bg-ocean-900 text-gold-400 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+      <i data-lucide="bot" class="w-4 h-4"></i>
+    </div>
+    <div class="bg-white border border-sand-200 rounded-2xl rounded-tl-none px-3.5 py-2 text-slate-500 shadow-xs flex items-center space-x-1.5">
+      <span class="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+      <span class="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+      <span class="w-1.5 h-1.5 bg-gold-500 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+    </div>
+  `;
+  messages.appendChild(typingBubble);
+  initLucide();
+  scrollIaraToBottom();
+
+  setTimeout(() => {
+    const el = document.getElementById(typingId);
+    if (el) el.remove();
+
+    const botResponse = getIaraBotAnswer(userText);
+    const botBubble = document.createElement('div');
+    botBubble.className = 'flex items-start space-x-2';
+    botBubble.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-ocean-900 text-gold-400 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+        <i data-lucide="bot" class="w-4 h-4"></i>
+      </div>
+      <div class="bg-white border border-sand-200 rounded-2xl rounded-tl-none p-3 text-slate-800 shadow-xs max-w-[85%] space-y-1.5">
+        ${botResponse}
+      </div>
+    `;
+    messages.appendChild(botBubble);
+    initLucide();
+    scrollIaraToBottom();
+  }, 450);
+}
+
+function getIaraBotAnswer(query) {
+  const q = query.toLowerCase();
+
+  // Horários
+  if (q.includes('horário') || q.includes('horario') || q.includes('abre') || q.includes('fecha') || q.includes('funcionamento') || q.includes('domingo')) {
+    return `
+      <p class="font-bold text-ocean-950">🕒 Horários de Funcionamento:</p>
+      <p>• <strong>Segunda a Sábado:</strong> Lojas e Alimentação das 10h às 22h.</p>
+      <p>• <strong>Domingos e Feriados:</strong> Alimentação das 12h às 21h | Lojas das 13h às 21h.</p>
+      <p class="text-slate-500 pt-1 text-[11px]">As salas Cinesystem abrem 30 minutos antes da primeira sessão do dia.</p>
+    `;
+  }
+
+  // Cinema / Filmes
+  if (q.includes('cinema') || q.includes('filme') || q.includes('cinesystem') || q.includes('ingresso') || q.includes('cartaz') || q.includes('sess') || q.includes('pipoca')) {
+    return `
+      <p class="font-bold text-ocean-950">🎬 Cinesystem VIP Laser Recreio Shopping:</p>
+      <p>Temos <strong>6 filmes em cartaz</strong> com projeção Laser e poltronas elétricas reclináveis:</p>
+      <p class="text-slate-600">• Capitão América: Admirável Mundo Novo<br>• Sonic 3: O Filme<br>• Moana 2<br>• O Auto da Compadecida 2<br>• Mufasa: O Rei Leão<br>• Wicked</p>
+      <div class="pt-1.5">
+        <a href="cinema.html" class="inline-flex items-center space-x-1 text-gold-600 hover:text-gold-700 font-bold underline">
+          <span>Ver programação e horários completos</span> &rarr;
+        </a>
+      </div>
+    `;
+  }
+
+  // Lojas / Compras
+  if (q.includes('loja') || q.includes('marca') || q.includes('comprar') || q.includes('roupa') || q.includes('sapato') || q.includes('renner') || q.includes('c&a') || q.includes('riachuelo') || q.includes('centauro') || q.includes('sephora')) {
+    return `
+      <p class="font-bold text-ocean-950">🛍️ Mais de 140 Lojas & Marcas:</p>
+      <p>Você encontra no Recreio Shopping grandes âncoras e marcas exclusivas: <strong>C&A, Lojas Renner, Riachuelo, Centauro, Casas Bahia, Sephora, Vivara, Ponto, O Boticário</strong> e muito mais!</p>
+      <div class="pt-1.5">
+        <a href="lojas.html" class="inline-flex items-center space-x-1 text-gold-600 hover:text-gold-700 font-bold underline">
+          <span>Buscar no catálogo completo de lojas</span> &rarr;
+        </a>
+      </div>
+    `;
+  }
+
+  // Polo Gastronômico / Restaurantes
+  if (q.includes('restaurante') || q.includes('comer') || q.includes('gastronom') || q.includes('varanda') || q.includes('almoço') || q.includes('jantar') || q.includes('outback') || q.includes('pizza') || q.includes('chopp')) {
+    return `
+      <p class="font-bold text-ocean-950">🍽️ Polo Gastronômico Varanda do Recreio:</p>
+      <p>Experiência gastronômica ao ar livre com <strong>Outback Steakhouse, Mamma Jamma Pizzaria, Camarada Camarão, Vizinhando Espetaria, Cervejaria Noi e Bacio di Latte</strong>.</p>
+      <p class="text-slate-600 pt-1">Todos com mesas ao ar livre e ambiente familiar e pet friendly.</p>
+    `;
+  }
+
+  // Eventos / Programação / Fique por Dentro
+  if (q.includes('evento') || q.includes('agenda') || q.includes('show') || q.includes('teatro') || q.includes('programação') || q.includes('programacao') || q.includes('lazer')) {
+    return `
+      <p class="font-bold text-ocean-950">📅 Agenda Viva no Recreio:</p>
+      <p>• <strong>Encontro Hot Wheels:</strong> Sábados no Piso L2.</p>
+      <p>• <strong>Feira de Adoção Pet Love:</strong> Fins de semana no Piso L1.</p>
+      <p>• <strong>Teatro Infantil Recreio:</strong> Domingos no Piso L3.</p>
+      <p>• <strong>Música ao Vivo:</strong> Sextas e Sábados na Varanda.</p>
+      <div class="pt-1.5">
+        <a href="eventos.html" class="inline-flex items-center space-x-1 text-gold-600 hover:text-gold-700 font-bold underline">
+          <span>Ver calendário e salvar na sua agenda</span> &rarr;
+        </a>
+      </div>
+    `;
+  }
+
+  // Pet Friendly
+  if (q.includes('pet') || q.includes('cachorro') || q.includes('gato') || q.includes('animal')) {
+    return `
+      <p class="font-bold text-ocean-950">🐾 Somos 100% Pet Friendly!</p>
+      <p>Seu melhor amigo é muito bem-vindo no Recreio Shopping! Temos:</p>
+      <p>• <strong>Carrinho Pet gratuito:</strong> Empréstimo no Balcão de Informações (L1).</p>
+      <p>• <strong>Pet Park:</strong> Espaço exclusivo para brincadeiras ao ar livre.</p>
+      <p>• <strong>Kit Higiênico:</strong> Disponível em todos os acessos do mall.</p>
+      <p class="text-slate-500 text-[11px] pt-1">Permitida a entrada de cães e gatos com coleira e guia.</p>
+    `;
+  }
+
+  // Estacionamento / Como Chegar / BRT / Carro
+  if (q.includes('estacionamento') || q.includes('carro') || q.includes('vaga') || q.includes('brt') || q.includes('chegar') || q.includes('endereço') || q.includes('endereco') || q.includes('localização') || q.includes('localizacao')) {
+    return `
+      <p class="font-bold text-ocean-950">🚗 Como Chegar & Estacionamento:</p>
+      <p>• <strong>Endereço:</strong> Av. das Américas, 19.019 - Recreio dos Bandeirantes, Rio de Janeiro.</p>
+      <p>• <strong>BRT:</strong> Estação Recreio Shopping (TransOeste) com passarela direta integrada.</p>
+      <p>• <strong>Estacionamento:</strong> Amplo estacionamento coberto e descoberto com pontos de recarga para veículos elétricos no Piso L1.</p>
+    `;
+  }
+
+  // Acessibilidade / TEA / Fraldário
+  if (q.includes('autis') || q.includes('tea') || q.includes('abafador') || q.includes('frald') || q.includes('bebê') || q.includes('bebe') || q.includes('cadeira') || q.includes('acessib')) {
+    return `
+      <p class="font-bold text-ocean-950">💙 Acessibilidade & Acolhimento:</p>
+      <p>• <strong>Acolhimento TEA:</strong> Empréstimo gratuito de abafadores de ruído, cordão de girassol e kits sensoriais no Balcão de Informações.</p>
+      <p>• <strong>Espaço Família & Fraldário:</strong> Pisos L1 e L2 com poltronas para amamentação e micro-ondas.</p>
+      <p>• <strong>Cadeiras de Rodas:</strong> Disponíveis nos acessos principais e Balcão de Atendimento.</p>
+    `;
+  }
+
+  // WhatsApp / Atendimento Humano / Telefone / SAC
+  if (q.includes('whatsapp') || q.includes('sac') || q.includes('humano') || q.includes('atendente') || q.includes('contato') || q.includes('telefone') || q.includes('ouvidoria') || q.includes('email') || q.includes('e-mail')) {
+    return `
+      <p class="font-bold text-ocean-950">💬 Canais de Atendimento Recreio Shopping:</p>
+      <p>• <strong>WhatsApp Oficial:</strong> <a href="https://wa.me/552140402274?text=Ol%C3%A1%20Recreio%20Shopping,%20gostaria%20de%20atendimento" target="_blank" class="text-emerald-700 font-bold underline">+55 (21) 4040-2274</a></p>
+      <p>• <strong>Central Telefônica:</strong> (21) 2018-5421</p>
+      <p>• <strong>E-mail:</strong> espaco.cliente@recreioshopping.com.br</p>
+      <p>• <strong>Balcão de Atendimento Presencial:</strong> Piso L1, próximo à Praça de Eventos.</p>
+    `;
+  }
+
+  // Resposta padrão inteligente
+  return `
+    <p>Entendi sua dúvida sobre <em>"${query}"</em>! ✨</p>
+    <p>Como assistente virtual do shopping, posso te orientar sobre:</p>
+    <p class="text-slate-600">• <strong>Horários</strong> de funcionamento<br>• <strong>Cinema VIP Laser</strong> e programação<br>• Localização de <strong>Lojas e Restaurantes</strong><br>• <strong>Eventos</strong> e regras <strong>Pet Friendly</strong></p>
+    <div class="pt-1.5 flex flex-col space-y-1">
+      <a href="https://wa.me/552140402274?text=Ol%C3%A1,%20gostaria%20de%20atendimento%20humano%20sobre%20${encodeURIComponent(query)}" target="_blank" class="text-emerald-600 font-bold hover:underline flex items-center gap-1">
+        <span>Falar no WhatsApp com nossa equipe (+55 21 4040-2274)</span> &rarr;
+      </a>
+    </div>
+  `;
+}
