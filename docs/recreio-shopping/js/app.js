@@ -1080,7 +1080,7 @@ function processIaraMessage(userText) {
   messages.appendChild(userBubble);
   scrollIaraToBottom();
 
-  // 2. Typing indicator simulando raciocínio da IA (400ms)
+  // 2. Indicador de digitação (400ms)
   const typingId = 'typing_' + Date.now();
   const typingBubble = document.createElement('div');
   typingBubble.id = typingId;
