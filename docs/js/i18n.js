@@ -92,6 +92,9 @@ const I18N = {
     "projects.per3.name": "Guia de Compras CasaShopping",
     "projects.per3.meta": "FullStack + DevOps · 2026",
     "projects.per3.desc": "Plataforma de catálogo de produtos com painel administrativo, em arquitetura de microsserviços. Monorepo Turborepo com Next.js, NestJS, PostgreSQL, MinIO e Docker.",
+    "projects.per4.name": "Recreio Shopping — Conceito Web",
+    "projects.per4.meta": "Front-End · UI/UX · 2026",
+    "projects.per4.desc": "Conceito e protótipo interativo para portal de shopping center com arquitetura multi-página, programação de cinema, guia de lojas e gastronomia, mapas e assistente virtual IARA.",
 
     /* --- SOBRE --- */
     "about.title": "Sobre mim",
@@ -275,6 +278,9 @@ const I18N = {
     "projects.per3.name": "Guia de Compras CasaShopping",
     "projects.per3.meta": "FullStack + DevOps · 2026",
     "projects.per3.desc": "Product catalog platform with an admin panel, in a microservices architecture. Turborepo monorepo with Next.js, NestJS, PostgreSQL, MinIO and Docker.",
+    "projects.per4.name": "Recreio Shopping — Web Concept",
+    "projects.per4.meta": "Front-End · UI/UX · 2026",
+    "projects.per4.desc": "Interactive web concept for a shopping mall portal featuring multi-page architecture, cinema showcase, store and dining directory, interactive maps, and virtual assistant IARA.",
 
     /* --- ABOUT --- */
     "about.title": "About me",

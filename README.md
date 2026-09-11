@@ -79,6 +79,18 @@ Welcome to my profile! I'm a passionate developer focusing on building great web
 </div>
 
 <div align="center">
+  <h3>💻 Featured Projects & Live Concepts</h3>
+
+  <p>
+    🌐 <b><a href="https://joao-19.github.io/Joao-19/recreio-shopping/">Recreio Shopping — Web Concept</a></b><br>
+    <i>Interactive multi-page mall portal prototype with cinema showcase, floor maps, and virtual assistant.</i>
+  </p>
+  <p>
+    🔗 <i>Explore more works on my <a href="https://joao-19.github.io/Joao-19/projetos.html"><b>Portfolio Projects Page</b></a></i>
+  </p>
+</div>
+
+<div align="center">
   <h3>📫 Connect with Me</h3>
   
   <a href="https://github.com/Joao-19">
