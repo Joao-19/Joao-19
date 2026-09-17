@@ -9,12 +9,48 @@
   <meta name="author" content="João Vitor de Melo Farias" />
   <link rel="canonical" href="https://joao-19.github.io/Joao-19/contato.html" />
   <meta name="robots" content="index, follow" />
+
+  <!-- Geo-tags para Indexação Local e Google Maps -->
+  <meta name="geo.region" content="BR-RJ" />
+  <meta name="geo.placename" content="Rio de Janeiro" />
+  <meta name="geo.position" content="-22.906847;-43.172896" />
+  <meta name="ICBM" content="-22.906847, -43.172896" />
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contato — João Vitor" />
-  <meta property="og:description" content="Disponível para projetos freelance. Fale comigo por email, WhatsApp ou LinkedIn." />
+  <meta property="og:description" content="Disponível para projetos freelance e desenvolvimento corporativo. Fale comigo por email, WhatsApp ou LinkedIn." />
   <meta property="og:url" content="https://joao-19.github.io/Joao-19/contato.html" />
   <meta property="og:image" content="https://joao-19.github.io/Joao-19/assets/profile.png" />
   <meta property="og:locale" content="pt_BR" />
+
+  <!-- JSON-LD: ContactPage e Serviço Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contato — João Vitor | Engenharia de Software & Full Stack",
+    "description": "Canais de contato direto para propostas de desenvolvimento de software, consultoria técnica e projetos freelance.",
+    "url": "https://joao-19.github.io/Joao-19/contato.html",
+    "mainEntity": {
+      "@type": "ProfessionalService",
+      "name": "João Vitor — Desenvolvimento de Software & Full Stack",
+      "telephone": "+55-21-98775-6002",
+      "email": "mailto:jjjoaovitor@gmail.com",
+      "url": "https://joao-19.github.io/Joao-19/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rio de Janeiro",
+        "addressRegion": "RJ",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -22.906847,
+        "longitude": -43.172896
+      }
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet" />
@@ -40,18 +76,18 @@
         <p class="lead" data-i18n="contact.text">Tem um projeto em mente? Escolha o canal que preferir.</p>
 
         <div class="contact-list">
-          <a class="contact-row" href="mailto:jjjoaovitor@gmail.com">
+          <a class="contact-row" href="mailto:jjjoaovitor@gmail.com?subject=Contato%20Profissional%20-%20Projeto%20de%20Software">
             <span class="contact-row__key" data-i18n="contact.email.label">email</span>
             <span class="contact-row__val">jjjoaovitor@gmail.com</span>
             <span class="contact-row__arrow">→</span>
           </a>
-          <!-- WhatsApp -->
-          <a class="contact-row" href="https://wa.me/5521987756002" target="_blank" rel="noopener">
+          <!-- WhatsApp comercial -->
+          <a class="contact-row" href="https://wa.me/5521987756002?text=Ol%C3%A1%20Jo%C3%A3o%2C%20gostaria%20de%20conversar%20sobre%20o%20desenvolvimento%20de%20um%20projeto." target="_blank" rel="noopener">
             <span class="contact-row__key" data-i18n="contact.whatsapp.label">whatsapp</span>
             <span class="contact-row__val">+55 (21) 98775-6002</span>
             <span class="contact-row__arrow">→</span>
           </a>
-          <!-- LinkedIn — TROQUE pela URL do seu perfil -->
+          <!-- LinkedIn -->
           <a class="contact-row" href="https://www.linkedin.com/in/joao-vitor-b4705b156/" target="_blank" rel="noopener">
             <span class="contact-row__key" data-i18n="contact.linkedin.label">linkedin</span>
             <span class="contact-row__val">linkedin.com/in/joao-vitor-b4705b156</span>

@@ -294,6 +294,46 @@ function closeRedirectModal() {
   if (m) m.classList.remove("open");
 }
 
+/* -------- Links externos que podem sair do ar -------- */
+/* Links com [data-healthcheck] são testados ao carregar a página. Se o site
+   não responder, o link é desativado e passa a exibir "fora do ar".
+   GitHub Pages não tem back-end e o CORS bloqueia ler a resposta de outro
+   domínio, então o teste usa fetch "no-cors": ele só falha quando o site não
+   responde (DNS inexistente, conexão recusada, timeout). Um site no ar que
+   devolve erro 500 continua contando como no ar. Ver LINKS-FORA-DO-AR.md. */
+const HEALTHCHECK_TIMEOUT_MS = 8000;
+
+async function isReachable(url) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), HEALTHCHECK_TIMEOUT_MS);
+  try {
+    await fetch(url, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
+    return true;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function disableLink(a) {
+  a.dataset.href = a.getAttribute("href");
+  a.removeAttribute("href");
+  a.classList.add("is-offline");
+  a.setAttribute("aria-disabled", "true");
+  const label = a.querySelector("[data-i18n]");
+  if (label) {
+    label.setAttribute("data-i18n", "projects.offline");
+    label.textContent = (window.I18N[getLang()] || window.I18N.pt)["projects.offline"];
+  }
+}
+
+function initLinkHealth() {
+  document.querySelectorAll("a[data-healthcheck]").forEach(async (a) => {
+    if (!(await isReachable(a.href))) disableLink(a);
+  });
+}
+
 /* -------- Inicialização -------- */
 function initChrome() {
   const active = document.body.getAttribute("data-page") || "index.html";
@@ -318,6 +358,7 @@ function initChrome() {
   initReveal();
   initCine();
   initExpanders();
+  initLinkHealth();
 }
 
 setTheme(getTheme()); // evita flash
