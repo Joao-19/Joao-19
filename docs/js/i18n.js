@@ -35,8 +35,8 @@ const I18N = {
     "home.stats.4": "projetos · imobiliário, logística, saas, games e fintech",
 
     /* --- HOME / Sobre curto --- */
-    "home.about.title": "Um pouco sobre mim",
-    "home.about.text": "Sou desenvolvedor full stack especializado em sistemas de larga escala. Construo aplicações web e mobile que transformam operações complexas em produtos digitais simples de usar — e que entregam resultado de verdade.",
+    "home.about.title": "Perfil de Desenvolvedor Full Stack",
+    "home.about.text": "Sou desenvolvedor full stack especializado em engenharia de software e sistemas de larga escala. Atuo como desenvolvedor full stack construindo aplicações web e mobile modernas que transformam operações complexas em produtos digitais escaláveis e de alta performance.",
 
     /* --- HOME / Tecnologias --- */
     "home.tech.title": "Tecnologias",
@@ -70,16 +70,16 @@ const I18N = {
     "home.solutions.3.badge": "03 · OPERAÇÃO CORPORATIVA",
     "home.solutions.3.title": "Microsserviços & Plataformas",
     "home.solutions.3.desc": "Sistemas sob medida para operações complexas (como frotas logísticas e catálogos corporativos), com dashboards e integrações via API.",
-    "home.solutions.cta.title": "Tem um projeto em andamento ou quer acelerar seu produto?",
-    "home.solutions.cta.sub": "Vamos avaliar a viabilidade técnica e os melhores caminhos de arquitetura.",
+    "home.solutions.cta.title": "Contratar Desenvolvedor Full Stack ou acelerar seu produto?",
+    "home.solutions.cta.sub": "Vamos avaliar a viabilidade técnica e arquitetura de ponta a ponta com um desenvolvedor full stack experiente.",
     "home.solutions.cta.btn1": "Conversar no WhatsApp",
     "home.solutions.cta.btn2": "Enviar e-mail",
 
     /* --- HOME / FAQ Comercial --- */
-    "home.faq.title": "Perguntas Frequentes",
-    "home.faq.lead": "Respostas diretas sobre contratação, prazos e fluxo de desenvolvimento.",
+    "home.faq.title": "Perguntas Frequentes sobre Desenvolvedor Full Stack",
+    "home.faq.lead": "Respostas diretas sobre contratação de desenvolvedor full stack, prazos e fluxo de desenvolvimento.",
     "home.faq.1.q": "Quais modelos de contratação estão disponíveis para projetos?",
-    "home.faq.1.a": "Atuo tanto por escopo fechado (ideal para MVPs, refatorações pontuais e projetos com requisitos bem delimitados) quanto por alocação mensal/squad dedicada (ideal para produtos em evolução contínua e suporte técnico prolongado).",
+    "home.faq.1.a": "Como desenvolvedor full stack freelance, atuo tanto por escopo fechado (ideal para MVPs, refatorações pontuais e projetos com requisitos bem delimitados) quanto por alocação mensal/squad dedicada (ideal para produtos em evolução contínua e suporte técnico prolongado).",
     "home.faq.2.q": "Qual é o prazo médio para desenvolvimento de um MVP ou sistema web?",
     "home.faq.2.a": "Dependendo da complexidade das regras de negócio e integrações, um MVP funcional com autenticação, banco de dados e interface responsiva costuma ser entregue entre 3 a 6 semanas, utilizando metodologias ágeis com entregas contínuas.",
     "home.faq.3.q": "Como é garantida a qualidade e a segurança do código entregue?",
