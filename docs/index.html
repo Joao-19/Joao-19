@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Desenvolvedor Full Stack — João Vitor | Web & Mobile</title>
-  <meta name="description" content="Desenvolvedor Full Stack Freelance no Rio de Janeiro. Desenvolvimento de sistemas web modernos, aplicativos nativos iOS (Swift/SwiftUI), APIs escaláveis e plataformas corporativas sob medida." />
+  <meta name="description" content="Desenvolvedor Full Stack no Rio de Janeiro. Sistemas web modernos, apps nativos iOS, APIs escaláveis e plataformas corporativas sob medida." />
   <meta name="author" content="João Vitor de Melo Farias" />
   <meta name="keywords" content="Desenvolvedor Full Stack, Full Stack Developer, Desenvolvedor Freelancer, Desenvolvimento de Software Rio de Janeiro, Criação de Sites, Apps iOS, Swift, SwiftUI, Node.js, Next.js, React, NestJS, APIs, Docker, João Vitor" />
   <link rel="canonical" href="https://joao-19.github.io/Joao-19/" />
@@ -204,7 +205,22 @@
 </head>
 <body data-page="index.html">
   <div class="wrap">
-    <div id="site-nav"></div>
+    <div id="site-nav">
+      <nav class="top" aria-label="Principal">
+        <a href="index.html" class="brand">joao_vitor<span class="blink">_</span></a>
+        <div class="links">
+          <a href="index.html" class="is-active"><span class="n">00</span><span data-i18n="nav.home">início</span></a>
+          <a href="sobre.html"><span class="n">01</span><span data-i18n="nav.about">sobre</span></a>
+          <a href="projetos.html"><span class="n">02</span><span data-i18n="nav.projects">projetos</span></a>
+          <a href="curriculo.html"><span class="n">03</span><span data-i18n="nav.resume">currículo</span></a>
+          <a href="contato.html"><span class="n">04</span><span data-i18n="nav.contact">contato</span></a>
+        </div>
+        <div class="toggles">
+          <button type="button" id="langToggle" title="idioma / language"><span data-lang-label>[EN]</span></button>
+          <button type="button" id="themeToggle" title="tema / theme"><span data-theme-icon>[◐]</span></button>
+        </div>
+      </nav>
+    </div>
 
     <!-- HERO -->
     <header>
@@ -470,7 +486,16 @@
       </div>
     </section>
 
-    <div id="site-footer"></div>
+    <div id="site-footer">
+      <footer class="site">
+        <span class="acc">●</span>
+        <span>joao_vitor</span>
+        <span>·</span>
+        <span data-i18n="home.role">Desenvolvedor Full Stack</span>
+        <span class="spacer"></span>
+        <span>// rio de janeiro · br &nbsp; <span class="acc">EOF</span></span>
+      </footer>
+    </div>
   </div>
 </body>
 </html>
